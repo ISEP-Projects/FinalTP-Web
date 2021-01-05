@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom"
 import Navbar from "./NavigationBar"
 import Home from "./Home"
 import Missions from "./Missions"
+import Mercs from "./Mercs"
 
 function App() {
 	return (
@@ -13,7 +14,9 @@ function App() {
 					<Route path="/home">
 						<Home />
 					</Route>
-					<Route path="/mercs"></Route>
+					<Route path="/mercs">
+					<Mercs />
+					</Route>						
 					<Route path="/guns"></Route>
 					<Route path="/jobs"></Route>
 					<Route path="/missions">
