@@ -1,12 +1,10 @@
 import "./App.css"
-import Navbar from "./Navbar"
+import Navbar from "./NavigationBar"
 
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header">
-				<Navbar />
-			</header>
+			<Navbar />
 			<h1>Cyberpunk - 2077</h1>
 		</div>
 	)
