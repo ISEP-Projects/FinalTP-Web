@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Card,
   Image,
@@ -7,9 +7,9 @@ import {
   Col,
   Button,
   Modal,
-  Form,
-} from "react-bootstrap";
-import { MERCS } from "../TestData/mercs";
+  Form
+} from 'react-bootstrap';
+import { MERCS } from '../TestData/mercs';
 
 const IsAlive = ({ isAlive }) => {
   if (!isAlive) {
@@ -19,7 +19,7 @@ const IsAlive = ({ isAlive }) => {
 const ReturnIterm = ({ merc }) => {
   return (
     <Col>
-      <Card style={{ width: "18rem" }}>
+      <Card style={{ width: '18rem' }}>
         <Card.Body>
           <Card.Title>
             {merc.nickname}
@@ -46,7 +46,7 @@ const ReturnIterm = ({ merc }) => {
 const AddIterm = ({ handleShow }) => {
   return (
     <Col>
-      <Card style={{ width: "18rem", height: "12.57rem" }}>
+      <Card style={{ width: '18rem', height: '12.57rem' }}>
         <Card.Body>
           <Button variant="link" onClick={handleShow}>
             <Image src="/Img/plus.svg" height="160" width="40" />
@@ -87,7 +87,7 @@ const Mercs = () => {
           <AddIterm handleShow={handleShow} />
         </Row>
       </Container>
-      
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add a merc</Modal.Title>
