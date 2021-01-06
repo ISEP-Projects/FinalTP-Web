@@ -18,13 +18,13 @@ const ReturnIterm = ({ jobs }) => {
     <Col>
       <Card style={{ width: '18rem' }}>
         <Card.Body>
-          <Card.Title>{jobs.id}</Card.Title>
+          {/* <Card.Title>{jobs.id}</Card.Title>
           <Card.Text>{jobs.fixer}</Card.Text>
           <Card.Text>{jobs.title}</Card.Text>
           <Card.Text>{jobs.description}</Card.Text>
           <Card.Text>{jobs.henchmenCount}</Card.Text>
           <Card.Text>{jobs.reward}</Card.Text>
-          <Card.Text>{jobs.isAvailable}</Card.Text>
+          <Card.Text>{jobs.isAvailable}</Card.Text> */}
           <Card.Link href="#">Choose</Card.Link>
         </Card.Body>
       </Card>
