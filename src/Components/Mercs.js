@@ -20,12 +20,12 @@ const ReturnIterm = ({ merc }) => {
   return (
     <Col>
       <Card style={{ width: "18rem" }}>
+        <Card.Header  bg={merc.isAlive === 1 ? "light" : "secondary"}>
+          {merc.nickname}
+          <IsAlive isAlive={merc.isAlive} />
+        </Card.Header>
         <Card.Body>
-          <Card.Title>
-            {merc.nickname}
-            <IsAlive isAlive={merc.isAlive} />
-          </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
+          <Card.Subtitle className="mb-2">
             {merc.legalAge}
           </Card.Subtitle>
           <Card.Text>
@@ -36,7 +36,7 @@ const ReturnIterm = ({ merc }) => {
             <Image src="/Img/dollar.svg" height="15" width="30" />
             {merc.eddies}
           </Card.Text>
-          <Card.Link href="#">Delete</Card.Link>
+          <Card.Link  href="#">Delete</Card.Link>
         </Card.Body>
       </Card>
     </Col>
@@ -46,7 +46,7 @@ const ReturnIterm = ({ merc }) => {
 const AddIterm = ({ handleShow }) => {
   return (
     <Col>
-      <Card style={{ width: "18rem", height: "12.57rem" }}>
+      <Card style={{ width: "18rem", height: "13.4rem" }}>
         <Card.Body>
           <Button variant="link" onClick={handleShow}>
             <Image src="/Img/plus.svg" height="160" width="40" />
@@ -87,7 +87,7 @@ const Mercs = () => {
           <AddIterm handleShow={handleShow} />
         </Row>
       </Container>
-      
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add a merc</Modal.Title>

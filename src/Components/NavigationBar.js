@@ -1,13 +1,12 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
+import {Nav, Navbar, Image} from "react-bootstrap"
 
-import Nav from "react-bootstrap/Nav"
-import Navbar from "react-bootstrap/Navbar"
 
 const NavigationBar = () => {
 	return (
 		<Navbar bg="dark" variant="dark">
-			<Navbar.Brand>Navbrand</Navbar.Brand>
+			<Navbar.Brand><Image src="/Img/logo.png" height="30" width="130" /></Navbar.Brand>
 			<Nav className="mr-auto">
 				<Nav.Link as={NavLink} to="/home">
 					Home
