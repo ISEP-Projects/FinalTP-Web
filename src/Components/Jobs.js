@@ -13,18 +13,18 @@ import {
 } from 'react-bootstrap';
 import { JOBS } from '../TestData/jobs';
 
-const ReturnIterm = ({ jobs }) => {
+const ReturnIterm = ({ job }) => {
   return (
     <Col>
-      <Card style={{ width: '18rem' }}>
+      <Card style={{ width: '15rem', color: '#000' }}>
         <Card.Body>
-          {/* <Card.Title>{jobs.id}</Card.Title>
-          <Card.Text>{jobs.fixer}</Card.Text>
-          <Card.Text>{jobs.title}</Card.Text>
-          <Card.Text>{jobs.description}</Card.Text>
-          <Card.Text>{jobs.henchmenCount}</Card.Text>
-          <Card.Text>{jobs.reward}</Card.Text>
-          <Card.Text>{jobs.isAvailable}</Card.Text> */}
+          <Card.Title>{job.id}</Card.Title>
+          <Card.Text>{job.fixer}</Card.Text>
+          <Card.Text>{job.title}</Card.Text>
+          <Card.Text>{job.description}</Card.Text>
+          <Card.Text>{job.henchmenCount}</Card.Text>
+          <Card.Text>{job.reward}</Card.Text>
+          <Card.Text>{job.isAvailable}</Card.Text>
           <Card.Link href="#">Choose</Card.Link>
         </Card.Body>
       </Card>
