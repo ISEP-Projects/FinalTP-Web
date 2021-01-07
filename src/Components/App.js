@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from "./NavigationBar";
 import Home from "./Home";
+import Jobs from "./Jobs";
 import Missions from "./Missions";
 import Mercs from "./Mercs";
 import Background from "../images/background_image.jpg";
@@ -28,7 +29,9 @@ function App() {
             <Mercs />
           </Route>
           <Route path="/guns"></Route>
-          <Route path="/jobs"></Route>
+          <Route path="/jobs">
+            <Jobs />
+          </Route>
           <Route path="/missions">
             <Missions />
           </Route>

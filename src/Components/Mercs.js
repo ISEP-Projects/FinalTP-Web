@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Card,
   Image,
@@ -7,9 +7,9 @@ import {
   Col,
   Button,
   Modal,
-  Form,
-} from "react-bootstrap";
-import { MERCS } from "../TestData/mercs";
+  Form
+} from 'react-bootstrap';
+import { MERCS } from '../TestData/mercs';
 
 const IsAlive = ({ isAlive }) => {
   if (!isAlive) {
