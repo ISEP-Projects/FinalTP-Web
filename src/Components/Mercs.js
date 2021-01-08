@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Card,
   Image,
@@ -7,9 +7,9 @@ import {
   Col,
   Button,
   Modal,
-  Form
-} from 'react-bootstrap';
-import { MERCS } from '../TestData/mercs';
+  Form,
+} from "react-bootstrap";
+import { MERCS } from "../TestData/mercs";
 import { WEAPONS } from "../TestData/weapons";
 
 const IsAlive = ({ isAlive }) => {
@@ -21,23 +21,23 @@ const ReturnIterm = ({ merc, weapons }) => {
   return (
     <Col>
       <Card style={{ width: "18rem" }}>
-        <Card.Header  bg={merc.isAlive === 1 ? "light" : "secondary"}>
+        <Card.Header bg={merc.isAlive === 1 ? "light" : "secondary"}>
           {merc.nickname}
           <IsAlive isAlive={merc.isAlive} />
         </Card.Header>
-        <Card.Body >
-          <Card.Subtitle className="mb-2">
-            {merc.legalAge}
-          </Card.Subtitle>
-          <Card.Text style={{textAlign: "left"}}>
+        <Card.Body>
+          <Card.Subtitle className="mb-2">{merc.legalAge}</Card.Subtitle>
+          <Card.Text style={{ textAlign: "left" }}>
             <Image src="/Img/gun.svg" height="15" width="30" />
-           { weapons.filter(weapon => weapon.id === merc.idWeapon).map(weapon => (weapon.name))}
+            {weapons
+              .filter((weapon) => weapon.id === merc.idWeapon)
+              .map((weapon) => weapon.name)}
           </Card.Text>
-          <Card.Text style={{textAlign: "left"}}>
+          <Card.Text style={{ textAlign: "left" }}>
             <Image src="/Img/dollar.svg" height="15" width="30" />
             {merc.eddies}
           </Card.Text>
-          <Card.Link  href="#">Delete</Card.Link>
+          <Card.Link href="#">Delete</Card.Link>
         </Card.Body>
       </Card>
     </Col>
@@ -59,7 +59,14 @@ const AddIterm = ({ handleShow }) => {
 };
 
 const Mercs = () => {
+  const initialFormData = Object.freeze({
+    name: "",
+    legalAge: "",
+    idWeapon: 1,
+    eddies: 0,
+  });
   const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -71,10 +78,21 @@ const Mercs = () => {
     ) : (
       existedMercs.map((merc, index) => (
         <div key={index}>
-          <ReturnIterm merc={merc} weapons={weapons}/>
+          <ReturnIterm merc={merc} weapons={weapons} />
         </div>
       ))
     );
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    //... submit to API
+  };
   return (
     <>
       <Container>
@@ -89,25 +107,31 @@ const Mercs = () => {
         </Row>
       </Container>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Add a merc</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Form.Group>
-              <Form.Control type="name" placeholder="Nick Name" />
+              <Form.Control
+                name="name"
+                placeholder="Nick Name"
+                onChange={handleChange}
+              />
             </Form.Group>
             <Form.Group>
-              <Form.Control type="age" placeholder="Age" />
+              <Form.Control
+                name="legalAge"
+                placeholder="Age"
+                onChange={handleChange}
+              />
             </Form.Group>
+            <Button type="submit" value="submit" color="primary">
+              Submit
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Add
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );
