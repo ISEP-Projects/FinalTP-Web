@@ -15,7 +15,7 @@ const NavigationBar = () => {
 					Mercs
 				</Nav.Link>
 				<Nav.Link as={NavLink} to="/guns">
-					Guns
+					Weapons
 				</Nav.Link>
 				<Nav.Link as={NavLink} to="/jobs">
 					Jobs

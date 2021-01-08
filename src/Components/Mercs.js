@@ -10,13 +10,14 @@ import {
   Form
 } from 'react-bootstrap';
 import { MERCS } from '../TestData/mercs';
+import { WEAPONS } from "../TestData/weapons";
 
 const IsAlive = ({ isAlive }) => {
   if (!isAlive) {
     return <Image src="/Img/poison.svg" height="15" width="30" />;
   } else return <Image src="/Img/heart.svg" height="15" width="30" />;
 };
-const ReturnIterm = ({ merc }) => {
+const ReturnIterm = ({ merc, weapons }) => {
   return (
     <Col>
       <Card style={{ width: "18rem" }}>
@@ -24,15 +25,15 @@ const ReturnIterm = ({ merc }) => {
           {merc.nickname}
           <IsAlive isAlive={merc.isAlive} />
         </Card.Header>
-        <Card.Body>
+        <Card.Body >
           <Card.Subtitle className="mb-2">
             {merc.legalAge}
           </Card.Subtitle>
-          <Card.Text>
+          <Card.Text style={{textAlign: "left"}}>
             <Image src="/Img/gun.svg" height="15" width="30" />
-            {merc.idWeapon}
+           { weapons.filter(weapon => weapon.id === merc.idWeapon).map(weapon => (weapon.name))}
           </Card.Text>
-          <Card.Text>
+          <Card.Text style={{textAlign: "left"}}>
             <Image src="/Img/dollar.svg" height="15" width="30" />
             {merc.eddies}
           </Card.Text>
@@ -62,7 +63,7 @@ const Mercs = () => {
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-
+  const weapons = WEAPONS;
   const existedMercs = MERCS;
   const merc =
     existedMercs.length === 0 ? (
@@ -70,7 +71,7 @@ const Mercs = () => {
     ) : (
       existedMercs.map((merc, index) => (
         <div key={index}>
-          <ReturnIterm merc={merc} />
+          <ReturnIterm merc={merc} weapons={weapons}/>
         </div>
       ))
     );
