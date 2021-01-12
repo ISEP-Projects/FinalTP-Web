@@ -5,15 +5,12 @@ import {
   Container,
   Row,
   Col,
-  Button,
-  Modal,
-  Form,
+  Button
 } from "react-bootstrap";
 import { MERCS } from "../TestData/mercs";
 import { WEAPONS } from "../TestData/weapons";
 import {MercCard} from "./MercCard"
-
-
+import {AddNewMerc} from "./AddNewMerc"
 
 const AddIterm = ({ handleShow }) => {
   return (
@@ -30,14 +27,7 @@ const AddIterm = ({ handleShow }) => {
 };
 
 const Mercs = () => {
-  const initialFormData = Object.freeze({
-    nickname: "",
-    legalAge: "",
-    idWeapon: 1,
-    eddies: 0,
-  });
   const [show, setShow] = useState(false)
-  const [formData, setFormData] = useState(initialFormData)
 
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -54,17 +44,7 @@ const Mercs = () => {
         </div>
       ))
     );
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    //... submit to API
-  };
+  
   return (
     <>
       <Container>
@@ -79,32 +59,7 @@ const Mercs = () => {
         </Row>
       </Container>
 
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add a merc</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Control
-                name="nickname"
-                placeholder="Nick Name"
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control
-                name="legalAge"
-                placeholder="Age"
-                onChange={handleChange}
-              />
-            </Form.Group>
-            <Button type="submit" value="submit" color="primary">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
-      </Modal>
+      <AddNewMerc show={show} handleClose={handleClose} />
     </>
   );
 };

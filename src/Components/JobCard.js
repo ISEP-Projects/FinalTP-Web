@@ -9,7 +9,7 @@ export const JobCard = ({ job }) => {
       <Accordion.Collapse eventKey={job.id}>
         <Card.Body>
           <Card.Title>{job.fixer}</Card.Title>
-          <Card.Text>description: {job.description}</Card.Text>
+          <Card.Text>{job.description}</Card.Text>
           <Card.Text>henchmenCount: {job.henchmenCount}</Card.Text>
           <Card.Text>reward:{job.reward}</Card.Text>
           <Button variant="outline-info" href="#" disabled={!job.isAvailable}>
