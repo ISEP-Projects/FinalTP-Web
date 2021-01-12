@@ -15,7 +15,7 @@ export const AddNewMerc = ({ show, handleClose }) => {
       [e.target.name]: e.target.value.trim(),
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmitNewMerc = (e) => {
     e.preventDefault();
     console.log(formData);
     //... submit to API
@@ -26,7 +26,7 @@ export const AddNewMerc = ({ show, handleClose }) => {
         <Modal.Title>Add a merc</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmitNewMerc}>
           <Form.Group>
             <Form.Control
               name="nickname"

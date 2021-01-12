@@ -9,10 +9,10 @@ export const IsAlive = ({ isAlive }) => {
 };
 
 export const MercCard = ({ merc, weapons, handleDelete }) => {
-  const [show, setShow] = useState(false);
+  const [showEditMerc, setShowEditMerc] = useState(false);
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleShowEditMerc = () => setShowEditMerc(true);
+  const handleCloseEditMerc = () => setShowEditMerc(false);
   const weapon = weapons
     .filter((weapon) => weapon.id === merc.idWeapon)
     .map((weapon) => weapon.name);
@@ -23,7 +23,7 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
         <Card.Header bg={merc.isAlive === 1 ? "light" : "secondary"}>
           {merc.nickname}
           <IsAlive isAlive={merc.isAlive} />
-          <Card.Link style={{float:"right"}} onClick={handleShow}>Edit</Card.Link>
+          <Card.Link style={{float:"right"}} onClick={handleShowEditMerc}>Edit</Card.Link>
         </Card.Header>
         <Card.Body>
           <Card.Subtitle className="mb-2">{merc.legalAge}</Card.Subtitle>
@@ -47,10 +47,10 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
         </Card.Body>
       </Card>
       <EditMerc
-        show={show}
+        show={showEditMerc}
         merc={merc}
         weapon={weapon}
-        handleClose={handleClose}
+        handleClose={handleCloseEditMerc}
       />
     </Col>
   );

@@ -1,37 +1,16 @@
 import React, { useState } from "react";
-import {
-  Card,
-  Image,
-  Container,
-  Row,
-  Col,
-  Button
-} from "react-bootstrap";
+import { Image, Container, Row, Col, Button } from "react-bootstrap";
 import { MERCS } from "../TestData/mercs";
 import { WEAPONS } from "../TestData/weapons";
-import {MercCard} from "./MercCard"
-import {AddNewMerc} from "./AddNewMerc"
-
-const AddIterm = ({ handleShow }) => {
-  return (
-    <Col>
-      <Card style={{ width: "18rem", height: "13.4rem" }}>
-        <Card.Body>
-          <Button variant="link" onClick={handleShow}>
-            <Image src="/Img/plus.svg" height="160" width="40" />
-          </Button>
-        </Card.Body>
-      </Card>
-    </Col>
-  );
-};
+import { MercCard } from "./MercCard";
+import { AddNewMerc } from "./AddNewMerc";
 
 const Mercs = () => {
-  const [show, setShow] = useState(false)
+  const [showAddNewMerc, setShowAddNewMerc] = useState(false);
 
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
-  const handleDelete = () => {}
+  const handleShowAddNewMerc = () => setShowAddNewMerc(true);
+  const handleCloseAddNewMerc = () => setShowAddNewMerc(false);
+  const handleDelete = () => {};
   const weapons = WEAPONS;
   const existedMercs = MERCS;
   const merc =
@@ -44,7 +23,7 @@ const Mercs = () => {
         </div>
       ))
     );
-  
+
   return (
     <>
       <Container>
@@ -55,11 +34,17 @@ const Mercs = () => {
         </Row>
         <Row className="justify-content--center">
           {merc}
-          <AddIterm handleShow={handleShow} />
+          <Button
+            variant="light"
+            onClick={handleShowAddNewMerc}
+            style={{ width: "18rem", height: "13.4rem", marginLeft: "15px" }}
+          >
+            <Image src="/Img/plus.svg" height="160" width="40" />
+          </Button>
         </Row>
       </Container>
 
-      <AddNewMerc show={show} handleClose={handleClose} />
+      <AddNewMerc show={showAddNewMerc} handleClose={handleCloseAddNewMerc} />
     </>
   );
 };

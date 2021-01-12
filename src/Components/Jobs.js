@@ -13,10 +13,10 @@ import { JobCard } from "./JobCard";
 import { AddNewJob } from "./AddNewJob";
 
 const Jobs = () => {
-  const [show, setShow] = useState(false)
+  const [showAddNewJob, setShowAddNewJob] = useState(false)
 
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  const handleShowAddNewJob = () => setShowAddNewJob(true)
+  const handleCloseAddNewJob = () => setShowAddNewJob(false)
   const existedJobs = JOBS;
   const jobs =
     existedJobs.length === 0 ? (
@@ -38,13 +38,13 @@ const Jobs = () => {
       </Row>
       <Row className="justify-content-md-center">{jobs}</Row>
       <Row className="justify-content-md-center">
-        <Button variant="dark" style={{float:"right", width:"50rem"}} onClick={handleShow}>
+        <Button variant="dark" style={{float:"right", width:"50rem"}} onClick={handleShowAddNewJob}>
          Add a new job
         </Button>
       </Row>
       
     </Container>
-    <AddNewJob  show={show} handleClose={handleClose}/>
+    <AddNewJob  show={showAddNewJob} handleClose={handleCloseAddNewJob}/>
     </>
   );
 };
