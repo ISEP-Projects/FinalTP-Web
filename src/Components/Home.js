@@ -1,7 +1,12 @@
 import React from "react"
+import {Image} from "react-bootstrap";
 
 const Home = () => {
-	return <h1>Homepage</h1>
+	return (
+		<>
+	<Image src="/Img/logo.png" />
+	</>
+	)
 }
 
 export default Home

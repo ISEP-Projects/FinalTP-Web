@@ -5,32 +5,11 @@ import {
   Container,
   Row,
   Col,
-  Button,
-  Alert,
-  Breadcrumb,
-  Card,
-  Form
+  Accordion
 } from 'react-bootstrap';
 import { JOBS } from '../TestData/jobs';
+import {JobCard} from './JobCard'
 
-const ReturnIterm = ({ job }) => {
-  return (
-    <Col>
-      <Card style={{ width: '15rem', color: '#000' }}>
-        <Card.Body>
-          <Card.Title>id: {job.id}</Card.Title>
-          <Card.Text>fixer: {job.fixer}</Card.Text>
-          <Card.Text>title:{job.title}</Card.Text>
-          <Card.Text>description: {job.description}</Card.Text>
-          <Card.Text>henchmenCount: {job.henchmenCount}</Card.Text>
-          <Card.Text>reward:{job.reward}</Card.Text>
-          <Card.Text>state:{job.isAvailable}</Card.Text>
-          <Card.Link href="#">Choose</Card.Link>
-        </Card.Body>
-      </Card>
-    </Col>
-  );
-};
 
 const Jobs = () => {
   const existedJobs = JOBS;
@@ -39,15 +18,12 @@ const Jobs = () => {
       <div></div>
     ) : (
       existedJobs.map((job, index) => (
-        <div key={index}>
-          <ReturnIterm job={job} />
-        </div>
+        <Accordion defaultActiveKey="0">
+          <JobCard job={job} />
+        </Accordion>
       ))
     );
   return (
-    // <div className="App">
-    <header className="App-header">
-      <Container>
         <Container>
           <Row>
             <Col>
@@ -56,9 +32,6 @@ const Jobs = () => {
           </Row>
           <Row>{jobs}</Row>
         </Container>
-      </Container>
-    </header>
-    // </div>
   );
 };
 

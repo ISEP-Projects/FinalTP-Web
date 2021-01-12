@@ -11,38 +11,9 @@ import {
 } from "react-bootstrap";
 import { MERCS } from "../TestData/mercs";
 import { WEAPONS } from "../TestData/weapons";
+import {MercCard} from "./MercCard"
 
-const IsAlive = ({ isAlive }) => {
-  if (!isAlive) {
-    return <Image src="/Img/poison.svg" height="15" width="30" />;
-  } else return <Image src="/Img/heart.svg" height="15" width="30" />;
-};
-const ReturnIterm = ({ merc, weapons }) => {
-  return (
-    <Col>
-      <Card style={{ width: "18rem" }}>
-        <Card.Header bg={merc.isAlive === 1 ? "light" : "secondary"}>
-          {merc.nickname}
-          <IsAlive isAlive={merc.isAlive} />
-        </Card.Header>
-        <Card.Body>
-          <Card.Subtitle className="mb-2">{merc.legalAge}</Card.Subtitle>
-          <Card.Text style={{ textAlign: "left" }}>
-            <Image src="/Img/gun.svg" height="15" width="30" />
-            {weapons
-              .filter((weapon) => weapon.id === merc.idWeapon)
-              .map((weapon) => weapon.name)}
-          </Card.Text>
-          <Card.Text style={{ textAlign: "left" }}>
-            <Image src="/Img/dollar.svg" height="15" width="30" />
-            {merc.eddies}
-          </Card.Text>
-          <Card.Link href="#">Delete</Card.Link>
-        </Card.Body>
-      </Card>
-    </Col>
-  );
-};
+
 
 const AddIterm = ({ handleShow }) => {
   return (
@@ -60,16 +31,17 @@ const AddIterm = ({ handleShow }) => {
 
 const Mercs = () => {
   const initialFormData = Object.freeze({
-    name: "",
+    nickname: "",
     legalAge: "",
     idWeapon: 1,
     eddies: 0,
   });
-  const [show, setShow] = useState(false);
-  const [formData, setFormData] = useState(initialFormData);
+  const [show, setShow] = useState(false)
+  const [formData, setFormData] = useState(initialFormData)
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const handleDelete = () => {}
   const weapons = WEAPONS;
   const existedMercs = MERCS;
   const merc =
@@ -78,7 +50,7 @@ const Mercs = () => {
     ) : (
       existedMercs.map((merc, index) => (
         <div key={index}>
-          <ReturnIterm merc={merc} weapons={weapons} />
+          <MercCard merc={merc} weapons={weapons} handleDelete={handleDelete} />
         </div>
       ))
     );
@@ -115,7 +87,7 @@ const Mercs = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Control
-                name="name"
+                name="nickname"
                 placeholder="Nick Name"
                 onChange={handleChange}
               />

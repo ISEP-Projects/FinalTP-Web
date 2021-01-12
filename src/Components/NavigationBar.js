@@ -6,7 +6,7 @@ import {Nav, Navbar, Image} from "react-bootstrap"
 const NavigationBar = () => {
 	return (
 		<Navbar bg="dark" variant="dark">
-			<Navbar.Brand><Image src="/Img/logo.png" height="30" width="130" /></Navbar.Brand>
+			<Navbar.Brand><Image src="/Img/nav_logo.png" height="30" width="130" /></Navbar.Brand>
 			<Nav className="mr-auto">
 				<Nav.Link as={NavLink} to="/home">
 					Home
