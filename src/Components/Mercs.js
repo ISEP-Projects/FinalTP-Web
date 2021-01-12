@@ -53,7 +53,7 @@ const Mercs = () => {
             <h1>Mercs</h1>
           </Col>
         </Row>
-        <Row>
+        <Row className="justify-content--center">
           {merc}
           <AddIterm handleShow={handleShow} />
         </Row>
