@@ -1,3 +1,5 @@
+export const MERCS_LOADING = "MERCS_LOADING"
+export const MERCS_FAILED = "MERCS_FAILED"
 export const GET_MERCS = "GET_MERCS"
 export const ADD_MERC = "ADD_MERC"
 export const MODIFY_MERC = "MODIFY_MERC"
@@ -6,10 +8,19 @@ export const GET_JOBS = "GET_JOBS"
 export const ADD_JOB = "ADD_JOB"
 export const DELETE_JOB = "DELETE_JOB"
 
+export const mercsLoading = () => ({
+    type: MERCS_LOADING
+});
+
 export const getMercs = (mercs) => ({
 	type: GET_MERCS,
 	payload: mercs,
 })
+
+export const mercsFailed = (errmess) => ({
+    type: MERCS_FAILED,
+    payload: errmess
+});
 
 export const addMerc = (merc) => ({
 	type: ADD_MERC,

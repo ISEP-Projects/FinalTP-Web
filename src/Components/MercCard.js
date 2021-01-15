@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Image, Col, Button } from "react-bootstrap";
 import { EditMerc } from "./EditMerc";
+import { Link } from "react-router-dom";
 
 export const IsAlive = ({ isAlive }) => {
   if (!isAlive) {
@@ -19,11 +20,13 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
 
   return (
     <Col>
-      <Card style={{ width: "18rem", marginBottom:"15px" }}>
+      <Card style={{ width: "18rem", marginBottom: "15px" }}>
         <Card.Header bg={merc.isAlive === 1 ? "light" : "secondary"}>
           {merc.nickname}
           <IsAlive isAlive={merc.isAlive} />
-          <Card.Link style={{float:"right"}} onClick={handleShowEditMerc}>Edit</Card.Link>
+          <Card.Link style={{ float: "right" }} onClick={handleShowEditMerc}>
+            Edit
+          </Card.Link>
         </Card.Header>
         <Card.Body>
           <Card.Subtitle className="mb-2">{merc.legalAge}</Card.Subtitle>
@@ -38,12 +41,16 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
           <Button variant="outline-danger" onClick={handleDelete}>
             Delete
           </Button>{" "}
-          <Button variant="outline-dark" href="#" disabled={!merc.isAlive}>
-            Buy Gun
-          </Button>{" "}
-          <Button variant="outline-info" href="#" disabled={!merc.isAlive}>
-            Get job
-          </Button>
+          <Link to={"/guns/" + merc.id}>
+            <Button variant="outline-dark" disabled={!merc.isAlive}>
+              Buy Gun
+            </Button>
+          </Link>{" "}
+          <Link to={"/jobs/" + merc.id}>
+            <Button variant="outline-info" disabled={!merc.isAlive}>
+              Get job
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
       <EditMerc

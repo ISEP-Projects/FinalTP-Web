@@ -29,8 +29,14 @@ function App() {
           <Route path="/mercs">
             <Mercs />
           </Route>
+          <Route path="/guns/:mercId">
+            <Weapons />
+          </Route>
           <Route path="/guns">
             <Weapons />
+          </Route>
+          <Route path="/jobs/:mercId">
+            <Jobs />
           </Route>
           <Route path="/jobs">
             <Jobs />

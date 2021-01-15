@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
+import axios from "axios";
+import { baseUrl } from "../shared/baseUrl"
 
 export const AddNewJob = ({ show, handleClose }) => {
   const initialFormData = Object.freeze({
@@ -8,7 +10,6 @@ export const AddNewJob = ({ show, handleClose }) => {
     description: "",
     henchmenCount: 0,
     reward: 0,
-    isAvailable: 1
   });
   const [formData, setFormData] = useState(initialFormData);
   const handleChange = (e) => {
@@ -19,8 +20,13 @@ export const AddNewJob = ({ show, handleClose }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    //... submit to API
+    const fixer = formData.fixer;
+    const title = formData.title;
+    const description = formData.description;
+    const henchmenCount = formData.henchmenCount;
+    const reward = formData.reward;
+    axios.post(`${baseUrl}job/create/${fixer}/${title}/${description}/${henchmenCount}/${reward}`)
+    handleClose()
   };
   return (
     <Modal show={show} onHide={handleClose} animation={false}>
