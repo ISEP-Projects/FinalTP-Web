@@ -2,7 +2,7 @@ import * as actions from "../actions"
 import Axios from "axios"
 
 const stateDefault = {
-	guns: [],
+	gunsList: [],
 }
 
 export const gunsReducer = (state = stateDefault, action) => {
@@ -10,7 +10,7 @@ export const gunsReducer = (state = stateDefault, action) => {
 		case actions.SET_GUNS:
 			return {
 				...state,
-				guns: action.payload,
+				gunsList: action.payload,
 			}
 
 		default:

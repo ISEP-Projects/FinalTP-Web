@@ -1,63 +1,81 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
-import { GunCard } from "./GunCard";
-import axios from "axios";
-import { baseUrl } from "../shared/baseUrl";
-import { Loading } from "./Loading";
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { Container, Row, Col } from 'react-bootstrap'
+import { GunCard } from './GunCard'
+import PropTypes from 'prop-types'
+import { connect, useDispatch } from 'react-redux'
+import { Loading } from './Loading'
+import { getGuns } from '../reducers/gunsReducer'
 
-const Weapons = () => {
-  const [weapons, setWeapons] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errMess, seterrMess] = useState();
+const Weapons = ({ gunsList }) => {
+	//const [weapons, setWeapons] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
+	//const [errMess, seterrMess] = useState()
 
-  useEffect(() => {
-    async function getData() {
-      await axios
-        .get(`${baseUrl}guns/`)
-        .then((response) => setWeapons(response.data), setIsLoading(false))
-        .catch((error) => seterrMess(error.response.data));
-    }
-    getData();
-  }, []);
+	const dispatch = useDispatch()
 
-  const { mercId } = useParams();
-  console.log({ mercId });
+	useEffect(() => {
+		if (isLoading && gunsList.length === 0) {
+			dispatch(getGuns())
+		}
+		if (gunsList.length !== 0) {
+			setIsLoading(false)
+		}
+	}, [dispatch, isLoading, gunsList])
 
-  const weapon = weapons.map((gun, index) => (
-    <div key={index}>
-      <GunCard gun={gun} mercId={mercId} />
-    </div>
-  ));
-  if (isLoading) {
-    return (
-      <Container>
-        <Row>
-          <Loading />
-        </Row>
-      </Container>
-    );
-  } else if (errMess) {
-    return (
-      <Container>
-        <Row>
-          <Col>
-            <h4>{errMess}</h4>
-          </Col>
-        </Row>
-      </Container>
-    );
-  } else
-    return (
-      <Container>
-        <Row>
-          <Col>
-            <h1>Weapons</h1>
-          </Col>
-        </Row>
-        <Row className="justify-content--center">{weapon}</Row>
-      </Container>
-    );
-};
+	console.log('Guns list')
+	console.log(gunsList)
 
-export default Weapons;
+	const { mercId } = useParams()
+	console.log({ mercId })
+
+	const weapon = gunsList.map((gun, index) => (
+		<div key={index}>
+			<GunCard gun={gun} mercId={mercId} />
+		</div>
+	))
+	if (isLoading) {
+		return (
+			<Container>
+				<Row>
+					<Loading />
+				</Row>
+			</Container>
+		)
+	} /* else if (errMess) {
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<h4>{errMess}</h4>
+					</Col>
+				</Row>
+			</Container>
+		)
+	}*/ else
+		return (
+			<Container>
+				<Row>
+					<Col>
+						<h1>Weapons</h1>
+					</Col>
+				</Row>
+				<Row className='justify-content--center'>{weapon}</Row>
+			</Container>
+		)
+}
+
+Weapons.propTypes = {
+	gunsList: PropTypes.array.isRequired,
+}
+const mapStateToProps = (state) => ({
+	gunsList: state.guns.gunsList,
+})
+
+/*
+const mapDispatchToProps = (dispatch) => ({
+	somefunction: (song) => dispatch(removeSongActionCreator(song)),
+})
+*/
+
+export default connect(mapStateToProps)(Weapons)
