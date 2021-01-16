@@ -39,7 +39,7 @@ export const mercsReducer = (state = stateDefault, action) => {
 
 export const getMercs = () => async (dispatch, getState) => {
 	console.log('Calling API')
-	const response = await Axios.get('http://localhost:8081/allmercs')
+	const response = await Axios.get('http://localhost:8081/merc/Allmercs')
 	console.log('\nMercs Data received: ')
 	dispatch(actions.getMercs(response.data))
 }
