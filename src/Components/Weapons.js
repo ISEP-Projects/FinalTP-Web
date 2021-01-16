@@ -5,7 +5,7 @@ import { GunCard } from './GunCard'
 import PropTypes from 'prop-types'
 import { connect, useDispatch } from 'react-redux'
 import { Loading } from './Loading'
-import { getGuns } from '../reducers/gunsReducer'
+import { getGuns } from '../actions'
 
 const Weapons = ({ gunsList }) => {
 	//const [weapons, setWeapons] = useState([])
@@ -67,6 +67,7 @@ const Weapons = ({ gunsList }) => {
 
 Weapons.propTypes = {
 	gunsList: PropTypes.array.isRequired,
+	isLoading: PropTypes.bool.isRequired
 }
 const mapStateToProps = (state) => ({
 	gunsList: state.guns.gunsList,

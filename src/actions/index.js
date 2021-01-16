@@ -6,7 +6,7 @@ export const SAVE_MERCS = 'SAVE_MERCS'
 export const ADD_MERC = 'ADD_MERC'
 export const MODIFY_MERC = 'MODIFY_MERC'
 export const SET_GUNS = 'SET_GUNS'
-export const GET_JOBS = 'GET_JOBS'
+export const SAVE_JOBS = 'SAVE_JOBS'
 export const ADD_JOB = 'ADD_JOB'
 export const DELETE_JOB = 'DELETE_JOB'
 
@@ -39,8 +39,8 @@ export const setGuns = (guns) => ({
 	payload: guns,
 })
 
-export const getJobs = (jobs) => ({
-	type: GET_JOBS,
+export const saveJobs = (jobs) => ({
+	type: SAVE_JOBS,
 	payload: jobs,
 })
 
@@ -54,9 +54,24 @@ export const deleteJob = (job) => ({
 	payload: job,
 })
 
+export const getGuns = () => async (dispatch, getState) => {
+	console.log('Calling API')
+	const response = await Axios.get('http://localhost:8081/guns')
+	console.log('\nData received: ')
+	dispatch(setGuns(response.data))
+}
+
 export const getMercs = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	const response = await Axios.get('http://localhost:8081/merc/Allmercs')
 	console.log('\nMercs Data received: ')
 	dispatch(saveMercs(response.data))
+}
+
+export const getJobs = () => async (dispatch, getState) => {
+	console.log('Calling API')
+	const response = await Axios.get('http://localhost:8081/job/Alljobs')
+	console.log('\nJobsData received: ')
+	console.log(response.data)
+	dispatch(saveJobs(response.data))
 }

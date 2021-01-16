@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
+import { getMercs, getGuns } from '../actions'
 import { Image, Container, Row, Col, Button } from 'react-bootstrap'
 import { MercCard } from './MercCard'
 import { AddNewMerc } from './AddNewMerc'
 import { Loading } from './Loading'
-import axios from 'axios'
-import { baseUrl } from '../shared/baseUrl'
-//import { getMercs } from '../reducers/mercsReducer'
-import { getMercs } from '../actions'
 
-const Mercs = ({ mercsList }) => {
+const Mercs = ({ mercsList, gunsList }) => {
 	const [showAddNewMerc, setShowAddNewMerc] = useState(false)
-	//const [mercs, setMercs] = useState([])
 	const [isLoading, setIsLoading] = useState(true)
-	const [errMess, seterrMess] = useState()
-	const [weapons, setWeapons] = useState([])
+	//const [errMess, seterrMess] = useState()
 
 	const handleShowAddNewMerc = () => setShowAddNewMerc(true)
 	const handleCloseAddNewMerc = () => setShowAddNewMerc(false)
@@ -26,24 +22,18 @@ const Mercs = ({ mercsList }) => {
 		if (isLoading && mercsList.length === 0) {
 			dispatch(getMercs())
 		}
-		if (mercsList.length !== 0) {
+		if (isLoading && gunsList.length === 0) {
+			dispatch(getGuns())
+		}
+
+		if (gunsList.length !== 0 && mercsList.length !== 0) {
 			setIsLoading(false)
 		}
-	}, [dispatch, isLoading, mercsList])
-
-	useEffect(() => {
-		async function getData() {
-			await axios
-				.get(`${baseUrl}guns/`)
-				.then((response) => setWeapons(response.data))
-				.catch((error) => seterrMess(error.response.data))
-		}
-		getData()
-	}, [])
+	}, [dispatch, isLoading, mercsList, gunsList])
 
 	const merc = mercsList.map((merc, index) => (
 		<div key={index}>
-			<MercCard merc={merc} weapons={weapons} handleDelete={handleDelete} />
+			<MercCard merc={merc} weapons={gunsList} handleDelete={handleDelete} />
 		</div>
 	))
 
@@ -55,7 +45,7 @@ const Mercs = ({ mercsList }) => {
 				</Row>
 			</Container>
 		)
-	} else if (errMess) {
+	} /* else if (errMess) {
 		return (
 			<Container>
 				<Row>
@@ -65,7 +55,7 @@ const Mercs = ({ mercsList }) => {
 				</Row>
 			</Container>
 		)
-	} else
+	}*/ else
 		return (
 			<>
 				<Container>
@@ -90,15 +80,17 @@ const Mercs = ({ mercsList }) => {
 		)
 }
 
+Mercs.propTypes = {
+	gunsList: PropTypes.array.isRequired,
+	mercsList: PropTypes.array.isRequired,
+	isLoading: PropTypes.bool.isRequired,
+}
+
 const mapStateToProps = (state) => ({
 	mercsList: state.mercs.mercs,
 	isLoading: state.mercs.isLoading,
 	errMess: state.mercs.errMess,
+	gunsList: state.guns.gunsList,
 })
 
-const mapDispatchToProps = (dispatch) => ({
-	getMercsFromApi: () => {
-		dispatch(getMercs())
-	},
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Mercs)
+export default connect(mapStateToProps)(Mercs)

@@ -1,5 +1,4 @@
-import * as actions from "../actions"
-import Axios from "axios"
+import * as actions from '../actions'
 
 const stateDefault = {
 	jobs: [],
@@ -7,20 +6,13 @@ const stateDefault = {
 
 export const jobsReducer = (state = stateDefault, action) => {
 	switch (action.type) {
-		case actions.GET_JOBS:
+		case actions.SAVE_JOBS:
 			return {
 				...state,
-				jobs: [],
+				jobs: action.payload,
 			}
 
 		default:
 			return state
 	}
-}
-
-export const getJobs = () => async (dispatch, getState) => {
-	console.log("Calling API")
-	const response = await Axios.get("http://localhost:8081/jobs")
-	console.log("\nData received: ")
-	dispatch(actions.getJobs(response.data))
 }

@@ -1,5 +1,4 @@
-import * as actions from "../actions"
-import Axios from "axios"
+import * as actions from '../actions'
 
 const stateDefault = {
 	gunsList: [],
@@ -16,11 +15,4 @@ export const gunsReducer = (state = stateDefault, action) => {
 		default:
 			return state
 	}
-}
-
-export const getGuns = () => async (dispatch, getState) => {
-	console.log("Calling API")
-	const response = await Axios.get("http://localhost:8081/guns")
-	console.log("\nData received: ")
-	dispatch(actions.setGuns(response.data))
 }
