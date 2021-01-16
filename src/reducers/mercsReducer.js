@@ -1,5 +1,4 @@
 import * as actions from '../actions'
-import Axios from 'axios'
 
 const stateDefault = {
 	isLoading: true,
@@ -9,7 +8,7 @@ const stateDefault = {
 
 export const mercsReducer = (state = stateDefault, action) => {
 	switch (action.type) {
-		case actions.GET_MERCS:
+		case actions.SAVE_MERCS:
 			return {
 				...state,
 				isLoading: false,
@@ -35,11 +34,4 @@ export const mercsReducer = (state = stateDefault, action) => {
 		default:
 			return state
 	}
-}
-
-export const getMercs = () => async (dispatch, getState) => {
-	console.log('Calling API')
-	const response = await Axios.get('http://localhost:8081/merc/Allmercs')
-	console.log('\nMercs Data received: ')
-	dispatch(actions.getMercs(response.data))
 }

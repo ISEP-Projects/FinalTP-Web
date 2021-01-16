@@ -6,7 +6,8 @@ import { AddNewMerc } from './AddNewMerc'
 import { Loading } from './Loading'
 import axios from 'axios'
 import { baseUrl } from '../shared/baseUrl'
-import { getMercs } from '../reducers/mercsReducer'
+//import { getMercs } from '../reducers/mercsReducer'
+import { getMercs } from '../actions'
 
 const Mercs = ({ mercsList }) => {
 	const [showAddNewMerc, setShowAddNewMerc] = useState(false)
