@@ -75,3 +75,18 @@ export const getJobs = () => async (dispatch, getState) => {
 	console.log(response.data)
 	dispatch(saveJobs(response.data))
 }
+
+export const createMerc = (nickname, legalAge) => async (
+	dispatch,
+	getState
+) => {
+	console.log('Calling API')
+	const response = await Axios.post(
+		`http://localhost:8081/merc/create/${nickname}/${legalAge}`
+	)
+	if (response.status === 200) {
+		console.log('\nMerc created ')
+		//get Updated mercsList
+		dispatch(getMercs())
+	}
+}
