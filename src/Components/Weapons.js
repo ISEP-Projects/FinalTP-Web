@@ -67,7 +67,7 @@ const Weapons = ({ gunsList }) => {
 
 Weapons.propTypes = {
 	gunsList: PropTypes.array.isRequired,
-	isLoading: PropTypes.bool.isRequired
+	isLoading: PropTypes.bool,
 }
 const mapStateToProps = (state) => ({
 	gunsList: state.guns.gunsList,
