@@ -100,3 +100,14 @@ export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
 		console.log('\nGun bought ')
 	}
 }
+
+//API Route not implemented yet!
+export const deleteMerc = (id) => async (dispatch, getState) => {
+	console.log('Calling API')
+	const response = await Axios.post(`http://localhost:8081/merc/delete/${id}`)
+	if (response.status === 200) {
+		console.log('\nMerc deleted ')
+		//get Updated mercsList
+		dispatch(getMercs())
+	}
+}

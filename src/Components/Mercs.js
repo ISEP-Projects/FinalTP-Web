@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getMercs, getGuns } from '../actions'
+import { getMercs, getGuns, deleteMerc } from '../actions'
 import { Image, Container, Row, Col, Button } from 'react-bootstrap'
 import { MercCard } from './MercCard'
 import { AddNewMerc } from './AddNewMerc'
@@ -12,11 +12,15 @@ const Mercs = ({ mercsList, gunsList }) => {
 	const [isLoading, setIsLoading] = useState(true)
 	//const [errMess, seterrMess] = useState()
 
+	const dispatch = useDispatch()
+
 	const handleShowAddNewMerc = () => setShowAddNewMerc(true)
 	const handleCloseAddNewMerc = () => setShowAddNewMerc(false)
-	const handleDelete = () => {}
 
-	const dispatch = useDispatch()
+	const handleDelete = (mercId) => {
+		//API not implemented yet
+		dispatch(deleteMerc(mercId))
+	}
 
 	useEffect(() => {
 		if (isLoading && mercsList.length === 0) {
