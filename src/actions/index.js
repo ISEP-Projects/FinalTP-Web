@@ -111,3 +111,21 @@ export const deleteMerc = (id) => async (dispatch, getState) => {
 		dispatch(getMercs())
 	}
 }
+
+export const createJob = (
+	fixer,
+	title,
+	description,
+	henchmenCount,
+	reward
+) => async (dispatch, getState) => {
+	console.log('Calling API')
+	const response = await Axios.post(
+		`http://localhost:8081/job/create/${fixer}/${title}/${description}/${henchmenCount}/${reward}`
+	)
+	if (response.status === 200) {
+		console.log('\nJob created ')
+		//get updated jobs list
+		dispatch(getJobs())
+	}
+}
