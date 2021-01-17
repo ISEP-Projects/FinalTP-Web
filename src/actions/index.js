@@ -90,3 +90,13 @@ export const createMerc = (nickname, legalAge) => async (
 		dispatch(getMercs())
 	}
 }
+
+export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
+	console.log('Calling API')
+	const response = await Axios.put(
+		`http://localhost:8081/merc/buygun/${mercId}/${gunId}`
+	)
+	if (response.status === 200) {
+		console.log('\nGun bought ')
+	}
+}
