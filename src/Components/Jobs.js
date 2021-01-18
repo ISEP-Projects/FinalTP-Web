@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect, useDispatch } from 'react-redux'
 import './App.css'
@@ -8,13 +8,9 @@ import { JobCard } from './JobCard'
 import { AddNewJob } from './AddNewJob'
 import { Loading } from './Loading'
 import { useParams } from 'react-router-dom'
-import { getJobs } from '../actions'
+import { getJobs, showAddJobForm } from '../actions'
 
-const Jobs = ({ jobsList }) => {
-	const [showAddNewJob, setShowAddNewJob] = useState(false)
-	const [isLoading, setIsLoading] = useState(true)
-	//const [errMess, seterrMess] = useState()
-
+const Jobs = ({ jobsList, isLoading, errMess,  showForm, handleShowAddNewJob, handleCloseAddNewJob}) => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
@@ -22,13 +18,7 @@ const Jobs = ({ jobsList }) => {
 			dispatch(getJobs())
 		}
 
-		if (jobsList.length !== 0 && isLoading) {
-			setIsLoading(false)
-		}
 	}, [dispatch, isLoading, jobsList])
-
-	const handleShowAddNewJob = () => setShowAddNewJob(true)
-	const handleCloseAddNewJob = () => setShowAddNewJob(false)
 
 	const { mercId } = useParams()
 
@@ -48,7 +38,7 @@ const Jobs = ({ jobsList }) => {
 				</Row>
 			</Container>
 		)
-	} /* else if (errMess) {
+	}  else if (errMess) {
 		return (
 			<Container>
 				<Row>
@@ -58,7 +48,7 @@ const Jobs = ({ jobsList }) => {
 				</Row>
 			</Container>
 		)
-	} */ else {
+	}  else {
 		return (
 			<>
 				<Container>
@@ -78,7 +68,7 @@ const Jobs = ({ jobsList }) => {
 						</Button>
 					</Row>
 				</Container>
-				<AddNewJob show={showAddNewJob} handleClose={handleCloseAddNewJob} />
+				<AddNewJob show={showForm} handleClose={handleCloseAddNewJob} />
 			</>
 		)
 	}
@@ -87,9 +77,18 @@ const Jobs = ({ jobsList }) => {
 Jobs.propTypes = {
 	jobsList: PropTypes.array.isRequired,
 	isLoading: PropTypes.bool.isRequired,
+	errMess: PropTypes.object.isRequired,
 }
 const mapStateToProps = (state) => ({
 	jobsList: state.jobs.jobs,
+	isLoading: state.jobs.isLoading,
+	errMess: state.jobs.errMess,
+	showForm: state.jobs.showForm
 })
 
-export default connect(mapStateToProps)(Jobs)
+const mapDispatchToProps = (dispatch) => ({
+	handleShowAddNewJob: () => dispatch(showAddJobForm(true)),
+	handleCloseAddNewJob: () => dispatch(showAddJobForm(false))
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Jobs)

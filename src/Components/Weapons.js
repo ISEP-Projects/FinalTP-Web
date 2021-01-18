@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap'
 import { GunCard } from './GunCard'
@@ -7,19 +7,13 @@ import { connect, useDispatch } from 'react-redux'
 import { Loading } from './Loading'
 import { getGuns } from '../actions'
 
-const Weapons = ({ gunsList }) => {
-	//const [weapons, setWeapons] = useState([])
-	const [isLoading, setIsLoading] = useState(true)
-	//const [errMess, seterrMess] = useState()
+const Weapons = ({ gunsList, isLoading, errMess }) => {
 
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		if (isLoading && gunsList.length === 0) {
 			dispatch(getGuns())
-		}
-		if (gunsList.length !== 0) {
-			setIsLoading(false)
 		}
 	}, [dispatch, isLoading, gunsList])
 
@@ -42,7 +36,7 @@ const Weapons = ({ gunsList }) => {
 				</Row>
 			</Container>
 		)
-	} /* else if (errMess) {
+	}  else if (errMess) {
 		return (
 			<Container>
 				<Row>
@@ -52,7 +46,7 @@ const Weapons = ({ gunsList }) => {
 				</Row>
 			</Container>
 		)
-	}*/ else
+	} else
 		return (
 			<Container>
 				<Row>
@@ -67,10 +61,13 @@ const Weapons = ({ gunsList }) => {
 
 Weapons.propTypes = {
 	gunsList: PropTypes.array.isRequired,
-	isLoading: PropTypes.bool,
+	isLoading: PropTypes.bool.isRequired,
+	errMess: PropTypes.object.isRequired,
 }
 const mapStateToProps = (state) => ({
 	gunsList: state.guns.gunsList,
+	isLoading: state.guns.isLoading,
+	errMess: state.guns.errMess
 })
 
 /*

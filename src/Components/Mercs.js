@@ -1,21 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getMercs, getGuns, deleteMerc } from '../actions'
+import { getMercs, getGuns, deleteMerc, showAddMercForm } from '../actions'
 import { Image, Container, Row, Col, Button } from 'react-bootstrap'
 import { MercCard } from './MercCard'
 import { AddNewMerc } from './AddNewMerc'
 import { Loading } from './Loading'
 
-const Mercs = ({ mercsList, gunsList }) => {
-	const [showAddNewMerc, setShowAddNewMerc] = useState(false)
-	const [isLoading, setIsLoading] = useState(true)
-	//const [errMess, seterrMess] = useState()
+const Mercs = ({ mercsList, gunsList, errMess, isLoading, showForm, handleShowAddNewMerc, handleCloseAddNewMerc}) => {
 
 	const dispatch = useDispatch()
-
-	const handleShowAddNewMerc = () => setShowAddNewMerc(true)
-	const handleCloseAddNewMerc = () => setShowAddNewMerc(false)
 
 	const handleDelete = (mercId) => {
 		//API not implemented yet
@@ -30,9 +24,6 @@ const Mercs = ({ mercsList, gunsList }) => {
 			dispatch(getGuns())
 		}
 
-		if (gunsList.length !== 0 && mercsList.length !== 0) {
-			setIsLoading(false)
-		}
 	}, [dispatch, isLoading, mercsList, gunsList])
 
 	const merc = mercsList.map((merc, index) => (
@@ -49,7 +40,7 @@ const Mercs = ({ mercsList, gunsList }) => {
 				</Row>
 			</Container>
 		)
-	} /* else if (errMess) {
+	}  else if (errMess) {
 		return (
 			<Container>
 				<Row>
@@ -59,7 +50,7 @@ const Mercs = ({ mercsList, gunsList }) => {
 				</Row>
 			</Container>
 		)
-	}*/ else
+	} else
 		return (
 			<>
 				<Container>
@@ -79,7 +70,7 @@ const Mercs = ({ mercsList, gunsList }) => {
 						</Button>
 					</Row>
 				</Container>
-				<AddNewMerc show={showAddNewMerc} handleClose={handleCloseAddNewMerc} />
+				<AddNewMerc show={showForm} handleClose={handleCloseAddNewMerc} />
 			</>
 		)
 }
@@ -95,6 +86,13 @@ const mapStateToProps = (state) => ({
 	isLoading: state.mercs.isLoading,
 	errMess: state.mercs.errMess,
 	gunsList: state.guns.gunsList,
+	showForm: state.mercs.showForm
 })
 
-export default connect(mapStateToProps)(Mercs)
+const mapDispatchToProps = (dispatch) => ({
+	handleShowAddNewMerc: () => dispatch(showAddMercForm(true)),
+	handleCloseAddNewMerc: () => dispatch(showAddMercForm(false))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mercs)

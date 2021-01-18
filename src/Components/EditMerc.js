@@ -5,8 +5,6 @@ export const EditMerc = ({ merc, show, handleClose, weapon }) => {
 	const initialFormData = Object.freeze({
 		nickname: merc.nickname,
 		legalAge: merc.legalAge,
-		Weapon: weapon,
-		eddies: merc.eddies,
 	})
 
 	const [formData, setFormData] = useState(initialFormData)
@@ -41,22 +39,6 @@ export const EditMerc = ({ merc, show, handleClose, weapon }) => {
 						<Form.Control
 							name='legalAge'
 							placeholder={merc.legalAge}
-							onChange={handleChange}
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Label>Weapon</Form.Label>
-						<Form.Control
-							name='legalAge'
-							placeholder={weapon}
-							onChange={handleChange}
-						/>
-					</Form.Group>{' '}
-					<Form.Group>
-						<Form.Label>Eddies</Form.Label>
-						<Form.Control
-							name='legalAge'
-							placeholder={merc.eddies}
 							onChange={handleChange}
 						/>
 					</Form.Group>
