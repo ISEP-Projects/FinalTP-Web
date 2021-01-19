@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Button, Modal, Form } from 'react-bootstrap'
-import { createJob } from '../actions'
+import { createJob, addJob } from '../actions'
 
-export const AddNewJob = ({ show, handleClose }) => {
+export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
+	console.log('JKSDFJL')
+	console.log(temp)
 	const initialFormData = Object.freeze({
 		fixer: '',
 		title: '',
@@ -30,6 +33,8 @@ export const AddNewJob = ({ show, handleClose }) => {
 		const henchmenCount = formData.henchmenCount
 		const reward = formData.reward
 
+		dispatch(addJob(fixer, title, description, henchmenCount, reward))
+
 		dispatch(createJob(fixer, title, description, henchmenCount, reward))
 		handleClose()
 	}
@@ -46,6 +51,12 @@ export const AddNewJob = ({ show, handleClose }) => {
 							name='fixer'
 							placeholder='Fixer'
 							onChange={handleChange}
+							required
+							isInvalid={addNewJobForm.errors.fixer.length > 0}
+							isValid={
+								addNewJobForm.values.fixer &&
+								addNewJobForm.errors.fixer.length === 0
+							}
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -54,6 +65,7 @@ export const AddNewJob = ({ show, handleClose }) => {
 							name='title'
 							placeholder='Title'
 							onChange={handleChange}
+							required
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -63,6 +75,7 @@ export const AddNewJob = ({ show, handleClose }) => {
 							name='description'
 							placeholder='Tell me about this job'
 							onChange={handleChange}
+							required
 						/>
 					</Form.Group>{' '}
 					<Form.Group>
@@ -71,6 +84,7 @@ export const AddNewJob = ({ show, handleClose }) => {
 							name='henchmenCount'
 							type='number'
 							onChange={handleChange}
+							required
 						/>
 						<Form.Label>Reward</Form.Label>
 						<Form.Control name='reward' type='number' onChange={handleChange} />
@@ -83,3 +97,29 @@ export const AddNewJob = ({ show, handleClose }) => {
 		</Modal>
 	)
 }
+
+AddNewJob.propTypes = {
+	addNewJobForm: PropTypes.shape({
+		values: PropTypes.shape({
+			fixer: PropTypes.string,
+			title: PropTypes.string,
+			description: PropTypes.string,
+			henchmenCount: PropTypes.number,
+			reward: PropTypes.number,
+		}),
+		errors: PropTypes.shape({
+			fixer: PropTypes.string,
+			title: PropTypes.string,
+			description: PropTypes.string,
+			henchmenCount: PropTypes.string,
+			reward: PropTypes.string,
+		}),
+	}),
+}
+
+const mapStateToProps = (state) => ({
+	addNewJobForm: state.forms.addNewJobForm,
+	temp: state.forms,
+})
+
+export default connect(mapStateToProps)(AddNewJob)
