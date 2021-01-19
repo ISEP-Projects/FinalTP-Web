@@ -1,28 +1,6 @@
-import { useDispatch } from 'react-redux'
 import { Card, Button, Col, Row, Image } from 'react-bootstrap'
-import { buyGun } from '../actions'
 
-export const GunCard = ({ gun, mercId }) => {
-	const dispatch = useDispatch()
-
-	const handleBuy = (gunId) => {
-		console.log('Buying ' + gunId + ' for ' + mercId)
-		dispatch(buyGun(mercId, gunId))
-	}
-
-	const button = !mercId ? (
-		<div></div>
-	) : (
-		<Button
-			variant='dark'
-			style={{ textAlign: 'center' }}
-			onClick={() => {
-				handleBuy(gun.id)
-			}}
-		>
-			Buy
-		</Button>
-	)
+export const GunCard = ({ gun, handleBuy }) => {
 	return (
 		<Col>
 			<Card style={{ width: '15rem', marginBottom: '15px' }}>
@@ -47,7 +25,15 @@ export const GunCard = ({ gun, mercId }) => {
 						</Col>
 					</Row>
 					<Card.Text style={{ textAlign: 'left' }}>{gun.description}</Card.Text>
-					{button}
+					<Button
+						variant='dark'
+						style={{ textAlign: 'center' }}
+						onClick={() => {
+							handleBuy(gun.id)
+						}}
+					>
+						Buy
+					</Button>
 				</Card.Body>
 			</Card>
 		</Col>

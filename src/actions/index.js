@@ -67,7 +67,6 @@ export const saveJobs = (jobs) => ({
 	payload: jobs,
 })
 
-
 export const showAddJobForm = (bool) => ({
 	type: SHOW_ADD_JOB_FORM,
 	payload: bool,
@@ -187,12 +186,24 @@ export const createMerc = (nickname, legalAge) => async (
 
 export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
 	console.log('Calling API')
-	const response = await Axios.put(
-		`http://localhost:8081/merc/buygun/${mercId}/${gunId}`
-	)
-	if (response.status === 200) {
-		console.log('\nGun bought ')
-	}
+	await Axios.put(`http://localhost:8081/merc/buygun/${mercId}/${gunId}`)
+		.then((result) => {
+			console.log('\nGun bought')
+			console.log(result)
+		})
+		.catch((error) => {
+			console.log('Error')
+			console.log(error)
+			if (error.response.status === 402) {
+				console.log('\nGun not bought: ')
+				alert(error.response.data)
+			} else if (error.response.status === 404) {
+				console.log('\nGun not bought: ')
+				alert(error.response.data)
+			} else {
+				alert('Unknown error.')
+			}
+		})
 }
 
 //API Route not implemented yet!
