@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, Accordion, Button } from 'react-bootstrap'
@@ -10,15 +10,20 @@ import { Loading } from './Loading'
 import { useParams } from 'react-router-dom'
 import { getJobs, showAddJobForm } from '../actions'
 
-const Jobs = ({ jobsList, isLoading, errMess,  showForm, handleShowAddNewJob, handleCloseAddNewJob}) => {
-	const dispatch = useDispatch()
-
+const Jobs = ({
+	jobsList,
+	isLoading,
+	errMess,
+	showForm,
+	handleShowAddNewJob,
+	handleCloseAddNewJob,
+	handleGetJobs,
+}) => {
 	useEffect(() => {
 		if (isLoading && jobsList.length === 0) {
-			dispatch(getJobs())
+			handleGetJobs()
 		}
-
-	}, [dispatch, isLoading, jobsList])
+	}, [handleGetJobs, isLoading, jobsList])
 
 	const { mercId } = useParams()
 
@@ -38,7 +43,7 @@ const Jobs = ({ jobsList, isLoading, errMess,  showForm, handleShowAddNewJob, ha
 				</Row>
 			</Container>
 		)
-	}  else if (errMess) {
+	} else if (errMess) {
 		return (
 			<Container>
 				<Row>
@@ -48,7 +53,7 @@ const Jobs = ({ jobsList, isLoading, errMess,  showForm, handleShowAddNewJob, ha
 				</Row>
 			</Container>
 		)
-	}  else {
+	} else {
 		return (
 			<>
 				<Container>
@@ -83,12 +88,13 @@ const mapStateToProps = (state) => ({
 	jobsList: state.jobs.jobs,
 	isLoading: state.jobs.isLoading,
 	errMess: state.jobs.errMess,
-	showForm: state.jobs.showForm
+	showForm: state.jobs.showForm,
 })
 
 const mapDispatchToProps = (dispatch) => ({
 	handleShowAddNewJob: () => dispatch(showAddJobForm(true)),
-	handleCloseAddNewJob: () => dispatch(showAddJobForm(false))
+	handleCloseAddNewJob: () => dispatch(showAddJobForm(false)),
+	handleGetJobs: () => dispatch(getJobs()),
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Jobs)
+export default connect(mapStateToProps, mapDispatchToProps)(Jobs)

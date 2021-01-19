@@ -11,7 +11,6 @@ export const ADD_MERC = 'ADD_MERC'
 export const MODIFY_MERC = 'MODIFY_MERC'
 export const SAVE_GUNS = 'SAVE_GUNS'
 export const SAVE_JOBS = 'SAVE_JOBS'
-export const ADD_JOB = 'ADD_JOB'
 export const SHOW_ADD_JOB_FORM = 'SHOW_ADD_JOB_FORM'
 export const SHOW_ADD_MERC_FORM = 'SHOW_ADD_MERC_FORM'
 export const DELETE_JOB = 'DELETE_JOB'
@@ -68,10 +67,6 @@ export const saveJobs = (jobs) => ({
 	payload: jobs,
 })
 
-export const addJob = (job) => ({
-	type: ADD_JOB,
-	payload: job,
-})
 
 export const showAddJobForm = (bool) => ({
 	type: SHOW_ADD_JOB_FORM,
@@ -91,70 +86,88 @@ export const deleteJob = (job) => ({
 export const getGuns = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	await Axios.get('http://localhost:8081/guns')
-	.then(response => {
-		if (response.status === 200){
-			return response;
-		} else {
-			const error = new Error('Error ' + response.status + ': ' + response.statusText)
-			error.response = response
-			throw error
-		}
-	},error => {
-		throw error;
-	})
-	.then(response => {
-		console.log('\nGun Data received: ')
-		dispatch(saveGuns(response.data))
-	}).catch(error => {
-		console.log('\nGun Data not received: ' + error.message )
-		dispatch(gunsFailed(error.message))
-	})
+		.then(
+			(response) => {
+				if (response.status === 200) {
+					return response
+				} else {
+					const error = new Error(
+						'Error ' + response.status + ': ' + response.statusText
+					)
+					error.response = response
+					throw error
+				}
+			},
+			(error) => {
+				throw error
+			}
+		)
+		.then((response) => {
+			console.log('\nGun Data received: ')
+			dispatch(saveGuns(response.data))
+		})
+		.catch((error) => {
+			console.log('\nGun Data not received: ' + error.message)
+			dispatch(gunsFailed(error.message))
+		})
 }
 
 export const getMercs = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	await Axios.get('http://localhost:8081/merc/Allmercs')
-	.then(response => {
-		if (response.status === 200){
-			return response;
-		} else {
-			const error = new Error('Error ' + response.status + ': ' + response.statusText)
-			error.response = response
-			throw error
-		}
-	},error => {
-		throw error;
-	})
-	.then(response => {
-		console.log('\nMercs Data received: ')
-	dispatch(saveMercs(response.data))
-	}).catch(error => {
-		console.log('\nMerc Data not received: ' + error.message )
-		dispatch(mercsFailed(error.message))
-	})
+		.then(
+			(response) => {
+				if (response.status === 200) {
+					return response
+				} else {
+					const error = new Error(
+						'Error ' + response.status + ': ' + response.statusText
+					)
+					error.response = response
+					throw error
+				}
+			},
+			(error) => {
+				throw error
+			}
+		)
+		.then((response) => {
+			console.log('\nMercs Data received: ')
+			dispatch(saveMercs(response.data))
+		})
+		.catch((error) => {
+			console.log('\nMerc Data not received: ' + error.message)
+			dispatch(mercsFailed(error.message))
+		})
 }
 
 export const getJobs = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	await Axios.get('http://localhost:8081/job/Alljobs')
-	.then(response => {
-		if (response.status === 200){
-			return response;
-		} else {
-			const error = new Error('Error ' + response.status + ': ' + response.statusText)
-			error.response = response
-			throw error
-		}
-	},error => {
-		throw error;
-	})
-	.then(response => {
-		console.log('\nJob Data received: ')
-		dispatch(saveJobs(response.data))
-	}).catch(error => {
-		console.log('\nJob Data not received: ' + error.message )
-		dispatch(jobsFailed(error.message))
-	})
+		.then(
+			(response) => {
+				if (response.status === 200) {
+					return response
+				} else {
+					const error = new Error(
+						'Error ' + response.status + ': ' + response.statusText
+					)
+					error.response = response
+					throw error
+				}
+			},
+			(error) => {
+				throw error
+			}
+		)
+		.then((response) => {
+			console.log('\nJob Data received: ')
+			dispatch(saveJobs(response.data))
+		})
+		.catch((error) => {
+			console.log('\nJob Data not received: ' + error.message)
+			dispatch(jobsFailed(error.message))
+		})
 }
 
 export const createMerc = (nickname, legalAge) => async (
@@ -206,7 +219,6 @@ export const createJob = (
 	)
 	if (response.status === 200) {
 		console.log('\nJob created ')
-		//get updated jobs list
 		dispatch(getJobs())
 	}
 }
