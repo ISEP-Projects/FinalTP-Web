@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
 import { Button, Modal, Form } from 'react-bootstrap'
-import { createJob, addJob } from '../actions'
+import { createJob } from '../actions'
 
-export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
-	console.log('JKSDFJL')
+export const AddNewJob = ({ show, handleClose, temp }) => {
+	console.log('state.forms')
 	console.log(temp)
+
 	const initialFormData = Object.freeze({
 		fixer: '',
 		title: '',
@@ -16,6 +16,7 @@ export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
 	})
 
 	const [formData, setFormData] = useState(initialFormData)
+
 	const handleChange = (e) => {
 		setFormData({
 			...formData,
@@ -33,9 +34,8 @@ export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
 		const henchmenCount = formData.henchmenCount
 		const reward = formData.reward
 
-		dispatch(addJob(fixer, title, description, henchmenCount, reward))
-
 		dispatch(createJob(fixer, title, description, henchmenCount, reward))
+
 		handleClose()
 	}
 	return (
@@ -52,11 +52,6 @@ export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
 							placeholder='Fixer'
 							onChange={handleChange}
 							required
-							isInvalid={addNewJobForm.errors.fixer.length > 0}
-							isValid={
-								addNewJobForm.values.fixer &&
-								addNewJobForm.errors.fixer.length === 0
-							}
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -83,11 +78,17 @@ export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
 						<Form.Control
 							name='henchmenCount'
 							type='number'
+							min={0}
 							onChange={handleChange}
 							required
 						/>
 						<Form.Label>Reward</Form.Label>
-						<Form.Control name='reward' type='number' onChange={handleChange} />
+						<Form.Control
+							name='reward'
+							type='number'
+							min={1}
+							onChange={handleChange}
+						/>
 					</Form.Group>
 					<Button type='submit' value='submit' color='primary'>
 						Add
@@ -97,29 +98,3 @@ export const AddNewJob = ({ show, handleClose, addNewJobForm, temp }) => {
 		</Modal>
 	)
 }
-
-AddNewJob.propTypes = {
-	addNewJobForm: PropTypes.shape({
-		values: PropTypes.shape({
-			fixer: PropTypes.string,
-			title: PropTypes.string,
-			description: PropTypes.string,
-			henchmenCount: PropTypes.number,
-			reward: PropTypes.number,
-		}),
-		errors: PropTypes.shape({
-			fixer: PropTypes.string,
-			title: PropTypes.string,
-			description: PropTypes.string,
-			henchmenCount: PropTypes.string,
-			reward: PropTypes.string,
-		}),
-	}),
-}
-
-const mapStateToProps = (state) => ({
-	addNewJobForm: state.forms.addNewJobForm,
-	temp: state.forms,
-})
-
-export default connect(mapStateToProps)(AddNewJob)
