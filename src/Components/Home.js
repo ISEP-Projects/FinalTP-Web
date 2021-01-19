@@ -1,12 +1,12 @@
-import React from "react";
-import { Image } from "react-bootstrap";
+import React from 'react'
+import { Image } from 'react-bootstrap'
 
 const Home = () => {
-  return (
-    <>
-      <Image src="/Img/logo.png" />
-    </>
-  );
-};
+	return (
+		<div className='Home'>
+			<Image src='/Img/logo.png' />
+		</div>
+	)
+}
 
-export default Home;
+export default Home
