@@ -10,7 +10,7 @@ describe("Mercs Reducer Testing", () => {
     });
   });
 
-  test("save mercs", () => {
+  test("Save mercs", () => {
     const mercs = "Morgan Blackhand";
     const action = {
       type: "SAVE_MERCS",
@@ -24,4 +24,40 @@ describe("Mercs Reducer Testing", () => {
     });
   });
 
+  test("Mercs loading", () => {
+    const action = {
+      type: "MERCS_LOADING",
+    };
+
+    expect(mercsReducer({}, action)).toEqual({
+      isLoading: true,
+      errMess: null,
+      mercs: [],
+    });
+  });
+
+  test("Mercs failed", () => {
+    const errMess = "mercs failed"
+    const action = {
+      type: "MERCS_FAILED",
+      payload: errMess
+    };
+
+    expect(mercsReducer({}, action)).toEqual({
+      isLoading: false,
+      errMess: errMess,
+    });
+  });
+
+  test("Show add form", () => {
+    const show = true
+    const action = {
+      type: "SHOW_ADD_MERC_FORM",
+      payload: show
+    };
+
+    expect(mercsReducer({}, action)).toEqual({
+      showForm: show,
+    });
+  });
 });
