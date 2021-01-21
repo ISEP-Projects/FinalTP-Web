@@ -38,7 +38,7 @@ const Weapons = ({ mercsList, gunsList, isLoading, errMess }) => {
 	const mercs = mercsList.map((merc) => (
 		<option
 			key={merc.id}
-			{...(merc.id == mercID ? { selected: 'true' } : {})}
+			{...(merc.id === mercID ? { selected: 'true' } : {})}
 			value={merc.id}
 		>
 			{merc.nickname}
@@ -96,7 +96,6 @@ const Weapons = ({ mercsList, gunsList, isLoading, errMess }) => {
 Weapons.propTypes = {
 	gunsList: PropTypes.array.isRequired,
 	isLoading: PropTypes.bool.isRequired,
-	errMess: PropTypes.object.isRequired,
 }
 const mapStateToProps = (state) => ({
 	mercsList: state.mercs.mercs,

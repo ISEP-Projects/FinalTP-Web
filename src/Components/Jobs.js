@@ -8,7 +8,7 @@ import { JobCard } from './JobCard'
 import { AddNewJob } from './AddNewJob'
 import { Loading } from './Loading'
 import { useParams } from 'react-router-dom'
-import { getJobs, showAddJobForm } from '../actions'
+import { deleteJob, getJobs, showAddJobForm, getJobDone } from '../actions'
 
 const Jobs = ({
 	jobsList,
@@ -18,6 +18,8 @@ const Jobs = ({
 	handleShowAddNewJob,
 	handleCloseAddNewJob,
 	handleGetJobs,
+	handleDelete,
+	handleChoose
 }) => {
 	useEffect(() => {
 		if (isLoading && jobsList.length === 0) {
@@ -30,7 +32,7 @@ const Jobs = ({
 	const job = jobsList.map((job, index) => (
 		<div key={index}>
 			<Accordion defaultActiveKey='0'>
-				<JobCard job={job} mercId={mercId} />
+				<JobCard job={job} mercId={mercId} handleDelete={handleDelete} handleChoose={handleChoose} />
 			</Accordion>
 		</div>
 	))
@@ -82,7 +84,6 @@ const Jobs = ({
 Jobs.propTypes = {
 	jobsList: PropTypes.array.isRequired,
 	isLoading: PropTypes.bool.isRequired,
-	errMess: PropTypes.object.isRequired,
 }
 const mapStateToProps = (state) => ({
 	jobsList: state.jobs.jobs,
@@ -95,6 +96,8 @@ const mapDispatchToProps = (dispatch) => ({
 	handleShowAddNewJob: () => dispatch(showAddJobForm(true)),
 	handleCloseAddNewJob: () => dispatch(showAddJobForm(false)),
 	handleGetJobs: () => dispatch(getJobs()),
+	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
+	handleChoose: (mercId, jobId) => dispatch(getJobDone(mercId, jobId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs)

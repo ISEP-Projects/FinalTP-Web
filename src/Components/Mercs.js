@@ -7,14 +7,9 @@ import { MercCard } from './MercCard'
 import { AddNewMerc } from './AddNewMerc'
 import { Loading } from './Loading'
 
-const Mercs = ({ mercsList, gunsList, errMess, isLoading, showForm, handleShowAddNewMerc, handleCloseAddNewMerc}) => {
+const Mercs = ({ mercsList, gunsList, errMess, isLoading, showForm, handleShowAddNewMerc, handleCloseAddNewMerc, handleDelete}) => {
 
 	const dispatch = useDispatch()
-
-	const handleDelete = (mercId) => {
-		//API not implemented yet
-		dispatch(deleteMerc(mercId))
-	}
 
 	useEffect(() => {
 		if (isLoading && mercsList.length === 0) {
@@ -91,7 +86,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	handleShowAddNewMerc: () => dispatch(showAddMercForm(true)),
-	handleCloseAddNewMerc: () => dispatch(showAddMercForm(false))
+	handleCloseAddNewMerc: () => dispatch(showAddMercForm(false)),
+	handleDelete: (mercId) => dispatch(deleteMerc(mercId))
 })
 
 

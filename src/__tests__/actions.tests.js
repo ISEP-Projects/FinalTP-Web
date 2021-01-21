@@ -113,12 +113,5 @@ describe('Testing actions', () => {
 		expect(actions.showAddMercForm(bool)).toEqual(expectedAction)
 	})
 
-	test('delete job', () => {
-		const job = 'testing'
-		const expectedAction = {
-			type: types.DELETE_JOB,
-			payload: job,
-		}
-		expect(actions.deleteJob(job)).toEqual(expectedAction)
-	})
+
 })

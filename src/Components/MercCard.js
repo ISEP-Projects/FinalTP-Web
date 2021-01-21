@@ -40,9 +40,7 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
 					</Card.Text>
 					<Button
 						variant='outline-danger'
-						onClick={() => {
-							handleDelete(merc.id)
-						}}
+						onClick={() => handleDelete(merc.id)}
 					>
 						Delete
 					</Button>{' '}
