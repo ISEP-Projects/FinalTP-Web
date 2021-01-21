@@ -85,22 +85,6 @@ export const deleteJob = (job) => ({
 export const getGuns = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	await Axios.get('http://localhost:8081/guns')
-		.then(
-			(response) => {
-				if (response.status === 200) {
-					return response
-				} else {
-					const error = new Error(
-						'Error ' + response.status + ': ' + response.statusText
-					)
-					error.response = response
-					throw error
-				}
-			},
-			(error) => {
-				throw error
-			}
-		)
 		.then((response) => {
 			console.log('\nGun Data received: ')
 			dispatch(saveGuns(response.data))
@@ -114,22 +98,6 @@ export const getGuns = () => async (dispatch, getState) => {
 export const getMercs = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	await Axios.get('http://localhost:8081/merc/Allmercs')
-		.then(
-			(response) => {
-				if (response.status === 200) {
-					return response
-				} else {
-					const error = new Error(
-						'Error ' + response.status + ': ' + response.statusText
-					)
-					error.response = response
-					throw error
-				}
-			},
-			(error) => {
-				throw error
-			}
-		)
 		.then((response) => {
 			console.log('\nMercs Data received: ')
 			dispatch(saveMercs(response.data))
@@ -143,22 +111,6 @@ export const getMercs = () => async (dispatch, getState) => {
 export const getJobs = () => async (dispatch, getState) => {
 	console.log('Calling API')
 	await Axios.get('http://localhost:8081/job/Alljobs')
-		.then(
-			(response) => {
-				if (response.status === 200) {
-					return response
-				} else {
-					const error = new Error(
-						'Error ' + response.status + ': ' + response.statusText
-					)
-					error.response = response
-					throw error
-				}
-			},
-			(error) => {
-				throw error
-			}
-		)
 		.then((response) => {
 			console.log('\nJob Data received: ')
 			dispatch(saveJobs(response.data))
