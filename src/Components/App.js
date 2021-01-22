@@ -13,7 +13,7 @@ function App() {
 			<BrowserRouter>
 				<Navbar />
 				<Switch>
-					<Route path='/home'>
+					<Route exact path={['/', '/home']}>
 						<Home />
 					</Route>
 					<Route path='/mercs'>
