@@ -2,7 +2,6 @@ import './App.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navbar from './NavigationBar'
 import Home from './Home'
-import Missions from './Missions'
 import Mercs from './Mercs'
 import Jobs from './Jobs'
 import Weapons from './Weapons'
@@ -30,9 +29,6 @@ function App() {
 					</Route>
 					<Route path='/jobs'>
 						<Jobs />
-					</Route>
-					<Route path='/missions'>
-						<Missions />
 					</Route>
 				</Switch>
 			</BrowserRouter>
