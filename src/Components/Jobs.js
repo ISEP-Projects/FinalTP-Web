@@ -15,6 +15,7 @@ import {
 	showAddJobForm,
 	getJobDone,
 	getMercs,
+	setShowToast,
 } from '../actions'
 
 const Jobs = ({
@@ -29,8 +30,11 @@ const Jobs = ({
 	handleGetJobs,
 	handleDelete,
 	handleGetJobDone,
+	content,
+	showToast,
+	handleShowToast,
 }) => {
-	const [mercId, setMercID] = useState(0)
+	const [mercID, setMercID] = useState(0)
 
 	useEffect(() => {
 		if (isLoading && jobsList.length === 0) {
@@ -43,7 +47,7 @@ const Jobs = ({
 
 	const { tempId } = useParams()
 
-	if (tempId !== undefined && mercId === 0) {
+	if (tempId !== undefined && mercID === 0) {
 		setMercID(tempId)
 	}
 
@@ -56,9 +60,12 @@ const Jobs = ({
 			<Accordion defaultActiveKey='0'>
 				<JobCard
 					job={job}
-					mercId={mercId}
+					mercId={mercID}
 					handleDelete={handleDelete}
 					handleGetJobDone={handleGetJobDone}
+					content={content}
+					showToast={showToast}
+					handleShowToast={handleShowToast}
 				/>
 			</Accordion>
 		</div>
@@ -94,7 +101,7 @@ const Jobs = ({
 					<Row className='justify-content-md-center'>
 						<Col xs='auto'>
 							<SelectMerc
-								mercId={mercId}
+								mercID={mercID}
 								mercsList={mercsList}
 								onChangeMerc={onChangeMerc}
 							/>
@@ -127,6 +134,8 @@ const mapStateToProps = (state) => ({
 	isLoading: state.jobs.isLoading,
 	errMess: state.jobs.errMess,
 	showForm: state.jobs.showForm,
+	content: state.toast.content,
+	showToast: state.toast.show,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -135,7 +144,8 @@ const mapDispatchToProps = (dispatch) => ({
 	handleGetMercs: () => dispatch(getMercs()),
 	handleGetJobs: () => dispatch(getJobs()),
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
-	handleGetJobDone: (mercId, jobId) => dispatch(getJobDone(mercId, jobId)),
+	handleGetJobDone: (mercID, jobId) => dispatch(getJobDone(mercID, jobId)),
+	handleShowToast: (bool) => dispatch(setShowToast(bool)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs)

@@ -192,6 +192,8 @@ export const deleteJob = (id) => async (dispatch, getState) => {
     console.log("\nJob deleted ");
     //get Updated mercsList
     dispatch(getJobs());
+    dispatch(setShowToast(true));
+    dispatch(setToast("Job deleted "));
   }
 };
 
@@ -214,12 +216,22 @@ export const createJob = (
 
 export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
   console.log("Calling API");
-  const response = await Axios.put(
-    `http://localhost:8081/gettingJobDone/${mercId}/${jobId}`
-  );
-  if (response.status === 200) {
-    console.log("\nJob get done ");
-    dispatch(getJobs());
-    dispatch(getMercs());
-  }
+  await Axios.put(`http://localhost:8081/gettingJobDone/${mercId}/${jobId}`)
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("\nJob get done ");
+        dispatch(getJobs());
+        dispatch(getMercs());
+        dispatch(getGuns());
+        dispatch(setShowToast(true));
+        dispatch(setToast("Job get done"));
+      }
+    })
+    .catch((err) => {
+      dispatch(getJobs());
+      dispatch(getMercs());
+      dispatch(getGuns());
+      dispatch(setShowToast(true));
+      dispatch(setToast(err.response.data));
+    });
 };
