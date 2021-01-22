@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
-import { getGuns, getMercs, buyGun, setShowToast } from '../actions'
-import { GunCard } from './GunCard'
-import { Loading } from './Loading'
-import { SetToast } from './Toast'
+import { getGuns, getMercs, buyGun, setShowToast } from "../actions";
+import { GunCard } from "./GunCard";
+import { Loading } from "./Loading";
+import { SetToast } from "./SetToast";
 import { SelectMerc } from './SelectMerc'
 
 const Weapons = ({

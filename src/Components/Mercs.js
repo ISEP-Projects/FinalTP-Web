@@ -12,7 +12,7 @@ import { Image, Container, Row, Col, Button } from "react-bootstrap";
 import { MercCard } from "./MercCard";
 import { AddNewMerc } from "./AddNewMerc";
 import { Loading } from "./Loading";
-import { SetToast } from "./Toast";
+import { SetToast } from "./SetToast";
 
 const Mercs = ({
   mercsList,
@@ -66,7 +66,7 @@ const Mercs = ({
     return (
       <>
         <Container>
-          <Row>
+          <Row style={{position: "absolute"}}>
             <SetToast
               text={content}
               show={showToast}
