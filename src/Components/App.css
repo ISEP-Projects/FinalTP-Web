@@ -48,3 +48,8 @@
 		transform: rotate(360deg);
 	}
 }
+
+.form-label {
+	font-weight: 600;
+	font-size: 1.2rem;
+}
