@@ -46,9 +46,13 @@ const Jobs = ({
 	}, [handleGetJobs, handleGetMercs, isLoading, jobsList, mercsList])
 
 	const { tempId } = useParams()
-
-	if (tempId !== undefined && mercID === 0) {
-		setMercID(tempId)
+	if (mercID === 0) {
+		if (tempId !== undefined) {
+			setMercID(tempId)
+		} else if (tempId === undefined && mercsList.length !== 0) {
+			console.log('Setting merc Id to ' + mercsList[0].id)
+			setMercID(mercsList[0].id)
+		}
 	}
 
 	const onChangeMerc = (e) => {

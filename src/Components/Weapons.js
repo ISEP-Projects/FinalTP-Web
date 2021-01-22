@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
 
-import { getGuns, getMercs, buyGun, setShowToast } from "../actions";
-import { GunCard } from "./GunCard";
-import { Loading } from "./Loading";
-import { SetToast } from "./SetToast";
+import { getGuns, getMercs, buyGun, setShowToast } from '../actions'
+import { GunCard } from './GunCard'
+import { Loading } from './Loading'
+import { SetToast } from './SetToast'
 import { SelectMerc } from './SelectMerc'
 
 const Weapons = ({
@@ -37,12 +37,18 @@ const Weapons = ({
 		dispatch(buyGun(mercID, gunId))
 	}
 
-	const { mercId } = useParams()
-	if (mercId !== undefined && mercID === 0) {
-		setMercID(mercId)
+	const { tempId } = useParams()
+	if (mercID === 0) {
+		if (tempId !== undefined) {
+			setMercID(tempId)
+		} else if (tempId === undefined && mercsList.length !== 0) {
+			console.log('Setting merc Id to ' + mercsList[0].id)
+			setMercID(mercsList[0].id)
+		}
 	}
 
 	const onChangeMerc = (e) => {
+		console.log('Setting merc id =' + e.target.value)
 		setMercID(e.target.value)
 	}
 
