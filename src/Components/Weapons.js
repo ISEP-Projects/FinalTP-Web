@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { getGuns, getMercs, buyGun, setShowToast } from "../actions";
 import { GunCard } from "./GunCard";
 import { Loading } from "./Loading";
-import { SetToast } from "./Toast";
+import { SetToast } from "./SetToast";
 
 const Weapons = ({
   mercsList,
@@ -81,7 +81,7 @@ const Weapons = ({
   } else
     return (
       <Container>
-        <Row>
+        <Row style={{position: "absolute"}}>
           <SetToast text={content} show={showToast} setShow={handleShowToast} />
         </Row>
         <Row>
