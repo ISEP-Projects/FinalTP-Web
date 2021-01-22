@@ -30,7 +30,7 @@ const Jobs = ({
 	handleDelete,
 	handleGetJobDone,
 }) => {
-	const [mercID, setMercID] = useState(0)
+	const [mercId, setMercID] = useState(0)
 
 	useEffect(() => {
 		if (isLoading && jobsList.length === 0) {
@@ -41,10 +41,10 @@ const Jobs = ({
 		}
 	}, [handleGetJobs, handleGetMercs, isLoading, jobsList, mercsList])
 
-	const { mercId } = useParams()
+	const { tempId } = useParams()
 
-	if (mercId !== undefined && mercID === 0) {
-		setMercID(mercId)
+	if (tempId !== undefined && mercId === 0) {
+		setMercID(tempId)
 	}
 
 	const onChangeMerc = (e) => {
@@ -94,7 +94,7 @@ const Jobs = ({
 					<Row className='justify-content-md-center'>
 						<Col xs='auto'>
 							<SelectMerc
-								mercID={mercID}
+								mercId={mercId}
 								mercsList={mercsList}
 								onChangeMerc={onChangeMerc}
 							/>
@@ -135,7 +135,7 @@ const mapDispatchToProps = (dispatch) => ({
 	handleGetMercs: () => dispatch(getMercs()),
 	handleGetJobs: () => dispatch(getJobs()),
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
-	handleGetJobDone: (mercID, jobId) => dispatch(getJobDone(mercID, jobId)),
+	handleGetJobDone: (mercId, jobId) => dispatch(getJobDone(mercId, jobId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs)
