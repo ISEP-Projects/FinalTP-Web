@@ -6,11 +6,13 @@ export const SelectMerc = ({ mercID, mercsList, onChangeMerc }) => {
 			<Form.Group controlId='selectMercForm'>
 				<Form.Label>Select Mercenary</Form.Label>
 				<Form.Control as='select' custom onChange={onChangeMerc} value={mercID}>
-					{mercsList.map((merc) => (
-						<option key={merc.id} value={merc.id}>
-							{merc.nickname}{' '}
-						</option>
-					))}
+					{mercsList
+						.filter((merc) => merc.isAlive)
+						.map((merc) => (
+							<option key={merc.id} value={merc.id}>
+								{merc.nickname}{' '}
+							</option>
+						))}
 				</Form.Control>
 			</Form.Group>
 		</Form>
