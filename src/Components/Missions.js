@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap'
 
 const Missions = () => {
 	return (
-		<Container className='Missions'>
+		<Container className='Container'>
 			<h1>Missionspage</h1>
 		</Container>
 	)

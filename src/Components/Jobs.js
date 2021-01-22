@@ -39,7 +39,7 @@ const Jobs = ({
 
 	if (isLoading) {
 		return (
-			<Container>
+			<Container className='Container'>
 				<Row>
 					<Loading />
 				</Row>
@@ -47,7 +47,7 @@ const Jobs = ({
 		)
 	} else if (errMess) {
 		return (
-			<Container>
+			<Container className='Container'>
 				<Row>
 					<Col>
 						<h4>{errMess}</h4>
@@ -58,7 +58,7 @@ const Jobs = ({
 	} else {
 		return (
 			<>
-				<Container>
+				<Container className='Container'>
 					<Row>
 						<Col>
 							<h1>Jobs</h1>

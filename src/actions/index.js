@@ -14,6 +14,8 @@ export const SAVE_JOBS = "SAVE_JOBS";
 export const SHOW_ADD_JOB_FORM = "SHOW_ADD_JOB_FORM";
 export const SHOW_ADD_MERC_FORM = "SHOW_ADD_MERC_FORM";
 export const DELETE_JOB = "DELETE_JOB";
+export const SET_TOAST = "SET_TOAST";
+export const SHOW_TOAST = "SHOW_TOAST";
 
 export const mercsLoading = () => ({
   type: MERCS_LOADING,
@@ -77,6 +79,16 @@ export const showAddMercForm = (bool) => ({
   payload: bool,
 });
 
+export const setShowToast = (bool) => ({
+  type: SHOW_TOAST,
+  payload: bool,
+});
+
+export const setToast = (content) => ({
+  type: SET_TOAST,
+  payload: content,
+});
+
 export const getGuns = () => async (dispatch, getState) => {
   console.log("Calling API");
   await Axios.get("http://localhost:8081/guns")
@@ -125,7 +137,7 @@ export const createMerc = (nickname, legalAge) => async (
     `http://localhost:8081/merc/create/${nickname}/${legalAge}`
   );
   if (response.status === 200) {
-    console.log("\nMerc created ");
+    console.log("\nMerc created " + response.data.result);
     //get Updated mercsList
     dispatch(getMercs());
   }
@@ -136,18 +148,18 @@ export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
   await Axios.put(`http://localhost:8081/merc/buygun/${mercId}/${gunId}`)
     .then((result) => {
       console.log("\nGun bought");
-	  console.log(result);
-	  dispatch(getMercs());
+      console.log(result);
+      dispatch(getMercs());
+      dispatch(setShowToast(true));
+      dispatch(setToast("Gun bought"));
     })
     .catch((error) => {
       console.log("Error");
       console.log(error);
-      if (error.response.status === 402) {
+      if (error.response.status === 402 || error.response.status === 404) {
         console.log("\nGun not bought: ");
-        alert(error.response.data);
-      } else if (error.response.status === 404) {
-        console.log("\nGun not bought: ");
-        alert(error.response.data);
+        dispatch(setShowToast(true));
+        dispatch(setToast(error.response.data));
       } else {
         alert("Unknown error.");
       }
@@ -157,12 +169,20 @@ export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
 //API Route not implemented yet!
 export const deleteMerc = (id) => async (dispatch, getState) => {
   console.log("Calling API");
-  const response = await Axios.delete(`http://localhost:8081/merc/${id}`);
-  if (response.status === 200) {
-    console.log("\nMerc deleted ");
-    //get Updated mercsList
-    dispatch(getMercs());
-  }
+  await Axios.delete(`http://localhost:8081/merc/${id}`)
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("\nMerc deleted ");
+        //get Updated mercsList
+        dispatch(getMercs());
+        dispatch(setShowToast(true));
+        dispatch(setToast(response.data));
+      }
+    })
+    .catch((err) => {
+      dispatch(setShowToast(true));
+      dispatch(setToast(err.response.data));
+    });
 };
 
 export const deleteJob = (id) => async (dispatch, getState) => {
@@ -199,7 +219,7 @@ export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
   );
   if (response.status === 200) {
     console.log("\nJob get done ");
-	dispatch(getJobs());
-	dispatch(getMercs());
+    dispatch(getJobs());
+    dispatch(getMercs());
   }
 };
