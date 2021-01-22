@@ -3,9 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Button, Modal, Form } from 'react-bootstrap'
 import { createJob } from '../actions'
 
-export const AddNewJob = ({ show, handleClose, temp }) => {
-	console.log('state.forms')
-	console.log(temp)
+export const AddNewJob = ({ show, handleClose }) => {
 
 	const initialFormData = Object.freeze({
 		fixer: '',
