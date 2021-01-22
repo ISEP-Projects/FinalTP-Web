@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import './App.css'
@@ -7,32 +7,59 @@ import { Container, Row, Col, Accordion, Button } from 'react-bootstrap'
 import { JobCard } from './JobCard'
 import { AddNewJob } from './AddNewJob'
 import { Loading } from './Loading'
+import { SelectMerc } from './SelectMerc'
 import { useParams } from 'react-router-dom'
-import { deleteJob, getJobs, showAddJobForm, getJobDone } from '../actions'
+import {
+	deleteJob,
+	getJobs,
+	showAddJobForm,
+	getJobDone,
+	getMercs,
+} from '../actions'
 
 const Jobs = ({
+	mercsList,
 	jobsList,
 	isLoading,
 	errMess,
 	showForm,
 	handleShowAddNewJob,
 	handleCloseAddNewJob,
+	handleGetMercs,
 	handleGetJobs,
 	handleDelete,
-	handleChoose
+	handleGetJobDone,
 }) => {
+	const [mercID, setMercID] = useState(0)
+
 	useEffect(() => {
 		if (isLoading && jobsList.length === 0) {
 			handleGetJobs()
 		}
-	}, [handleGetJobs, isLoading, jobsList])
+		if (isLoading && mercsList.length === 0) {
+			handleGetMercs()
+		}
+	}, [handleGetJobs, handleGetMercs, isLoading, jobsList, mercsList])
 
 	const { mercId } = useParams()
+
+	if (mercId !== undefined && mercID === 0) {
+		setMercID(mercId)
+	}
+
+	const onChangeMerc = (e) => {
+		setMercID(e.target.value)
+	}
 
 	const job = jobsList.map((job, index) => (
 		<div key={index}>
 			<Accordion defaultActiveKey='0'>
-				<JobCard job={job} mercId={mercId} handleDelete={handleDelete} handleChoose={handleChoose} />
+				<JobCard
+					job={job}
+					mercId={mercId}
+					handleDelete={handleDelete}
+					handleGetJobDone={handleGetJobDone}
+				/>
 			</Accordion>
 		</div>
 	))
@@ -64,6 +91,15 @@ const Jobs = ({
 							<h1>Jobs</h1>
 						</Col>
 					</Row>
+					<Row className='justify-content-md-center'>
+						<Col xs='auto'>
+							<SelectMerc
+								mercID={mercID}
+								mercsList={mercsList}
+								onChangeMerc={onChangeMerc}
+							/>
+						</Col>
+					</Row>
 					<Row className='justify-content-md-center'>{job}</Row>
 					<Row className='justify-content-md-center'>
 						<Button
@@ -86,6 +122,7 @@ Jobs.propTypes = {
 	isLoading: PropTypes.bool.isRequired,
 }
 const mapStateToProps = (state) => ({
+	mercsList: state.mercs.mercs,
 	jobsList: state.jobs.jobs,
 	isLoading: state.jobs.isLoading,
 	errMess: state.jobs.errMess,
@@ -95,9 +132,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
 	handleShowAddNewJob: () => dispatch(showAddJobForm(true)),
 	handleCloseAddNewJob: () => dispatch(showAddJobForm(false)),
+	handleGetMercs: () => dispatch(getMercs()),
 	handleGetJobs: () => dispatch(getJobs()),
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
-	handleChoose: (mercId, jobId) => dispatch(getJobDone(mercId, jobId))
+	handleGetJobDone: (mercID, jobId) => dispatch(getJobDone(mercID, jobId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs)
