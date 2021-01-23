@@ -6,7 +6,7 @@ import {
   getGuns,
   deleteMerc,
   showAddMercForm,
-  setShowToast
+  setShowToast,
 } from "../actions";
 import { Image, Container, Row, Col, Button } from "react-bootstrap";
 import { MercCard } from "./MercCard";
@@ -40,7 +40,7 @@ const Mercs = ({
 
   const merc = mercsList.map((merc, index) => (
     <div key={index}>
-      <MercCard merc={merc} weapons={gunsList} handleDelete={handleDelete}/>
+      <MercCard merc={merc} weapons={gunsList} handleDelete={handleDelete} />
     </div>
   ));
 
@@ -66,19 +66,13 @@ const Mercs = ({
     return (
       <>
         <Container>
-          <Row style={{position: "absolute"}}>
-            <SetToast
-              text={content}
-              show={showToast}
-              setShow={handleShowToast}
-            />
-          </Row>
+          <SetToast text={content} show={showToast} setShow={handleShowToast} />
           <Row>
             <Col>
               <h1>Mercs</h1>
             </Col>
           </Row>
-          <Row className="justify-content--center">
+          <Row className="justify-content-md-center">
             {merc}
             <Button
               variant="light"

@@ -1,4 +1,5 @@
 .App {
+	padding-top: 60px;
 	text-align: center;
 	background-image: url('../images/background_image.jpg');
 	background-repeat: no-repeat;
@@ -12,6 +13,12 @@
 }
 /*
 */
+
+.SetToast {
+	position: absolute;
+	top: 100px;
+	left: 12px;
+}
 
 .App-logo {
 	height: 40vmin;
