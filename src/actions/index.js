@@ -234,4 +234,23 @@ export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
       dispatch(setShowToast(true));
       dispatch(setToast(err.response.data));
     });
-};
+  }
+
+export const editMerc = (mercId, name, age) => async (dispatch) => {
+  console.log("Calling API");
+  await Axios.put(`http://localhost:8081/merc/update/${mercId}/${name}/${age}`)
+    .then((response) => {
+      if (response.status === 200) {
+        console.log("\nEdit success");
+        dispatch(getMercs());
+        dispatch(setShowToast(true));
+        dispatch(setToast("Edit success"));
+      }
+    })
+    .catch((err) => {
+      dispatch(getMercs());
+      dispatch(setShowToast(true));
+      dispatch(setToast(err.response.data));
+      console.log(err.response.data)
+    });
+}

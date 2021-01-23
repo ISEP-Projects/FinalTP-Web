@@ -59,7 +59,6 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
 			<EditMerc
 				show={showEditMerc}
 				merc={merc}
-				weapon={weapon}
 				handleClose={handleCloseEditMerc}
 			/>
 		</Col>

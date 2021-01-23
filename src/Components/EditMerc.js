@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Button, Modal, Form } from 'react-bootstrap'
+import { editMerc } from '../actions'
 
-export const EditMerc = ({ merc, show, handleClose, weapon }) => {
+export const EditMerc = ({ merc, show, handleClose }) => {
 	const initialFormData = Object.freeze({
 		nickname: merc.nickname,
 		legalAge: merc.legalAge,
@@ -14,10 +16,15 @@ export const EditMerc = ({ merc, show, handleClose, weapon }) => {
 			[e.target.name]: e.target.value.trim(),
 		})
 	}
+
+	const dispatch = useDispatch()
+
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		console.log(formData)
-		//... submit to API
+		const nickname = formData.nickname
+		const legalAge = formData.legalAge
+		dispatch(editMerc(merc.id, nickname, legalAge))
+		handleClose()
 	}
 	return (
 		<Modal show={show} onHide={handleClose} animation={false}>
@@ -42,7 +49,7 @@ export const EditMerc = ({ merc, show, handleClose, weapon }) => {
 							onChange={handleChange}
 						/>
 					</Form.Group>
-					<Button type='submit' value='submit' color='primary'>
+					<Button type='submit' value='submit' color='primary' >
 						Save
 					</Button>
 				</Form>
