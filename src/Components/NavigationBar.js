@@ -4,7 +4,7 @@ import { Nav, Navbar, Image } from 'react-bootstrap';
 
 const NavigationBar = () => {
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar fixed="top" bg="dark" variant="dark">
       <Navbar.Brand>
         <Image src="/Img/nav_logo.png" height="30" width="130" />
       </Navbar.Brand>

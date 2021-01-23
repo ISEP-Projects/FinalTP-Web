@@ -36,7 +36,7 @@ export const AddNewJob = ({ show, handleClose }) => {
     handleClose();
   };
   return (
-    <Modal show={show} onHide={handleClose} animation={false}>
+    <Modal show={show} onHide={handleClose} animation={false} data-testid="addNewJob">
       <Modal.Header closeButton>
         <Modal.Title>Add a job</Modal.Title>
       </Modal.Header>
