@@ -1,5 +1,5 @@
-import { Card, Button, Accordion, Col, Row } from "react-bootstrap";
-import { SetToast } from "./SetToast";
+import { Card, Button, Accordion, Col, Row } from 'react-bootstrap';
+import { SetToast } from './SetToast';
 
 export const JobCard = ({
   job,
@@ -8,15 +8,18 @@ export const JobCard = ({
   handleGetJobDone,
   content,
   showToast,
-  handleShowToast,
+  handleShowToast
 }) => {
   return (
-    <Card style={{ width: "50rem", color: "#000", textAlign: "left" }}>
+    <Card
+      data-testid="jobCard"
+      style={{ width: '50rem', color: '#000', textAlign: 'left' }}
+    >
       <Accordion.Toggle as={Card.Header} variant="link" eventKey={job.id}>
         <Row>
           <Col>{job.title}</Col>
-          <Col style={{ textAlign: "right" }}>
-            {"By "}
+          <Col style={{ textAlign: 'right' }}>
+            {'By '}
             {job.fixer}
           </Col>
         </Row>
@@ -38,7 +41,7 @@ export const JobCard = ({
             variant="outline-danger"
             disabled={job.isAvailable}
             onClick={() => handleDelete(job.id)}
-            style={{ float: "right" }}
+            style={{ float: 'right' }}
           >
             Delete
           </Button>
