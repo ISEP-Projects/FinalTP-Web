@@ -59,3 +59,12 @@
 	font-weight: 600;
 	font-size: 1.2rem;
 }
+
+#selectMercForm,
+.card-link {
+	cursor: pointer;
+}
+
+.accordion > .card > .card-header {
+	cursor: pointer;
+}
