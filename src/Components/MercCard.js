@@ -31,11 +31,11 @@ export const MercCard = ({ merc, weapons, handleDelete }) => {
 				<Card.Body>
 					<Card.Subtitle className='mb-2'>{merc.legalAge}</Card.Subtitle>
 					<Card.Text style={{ textAlign: 'left' }}>
-						<Image src='/Img/gun.svg' height='15' width='30' />
+						<Image src='/Img/gun.svg' height='20' width='30' />
 						{weapon}
 					</Card.Text>
 					<Card.Text style={{ textAlign: 'left' }}>
-						<Image src='/Img/dollar.svg' height='15' width='30' />
+						<Image src='/Img/dollar.svg' height='20' width='30' />
 						{merc.eddies}
 					</Card.Text>
 					<Button

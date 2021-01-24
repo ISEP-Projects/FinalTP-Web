@@ -19,21 +19,21 @@ export const GunCard = ({ gun, handleBuy }) => {
         <Card.Body>
           <Row style={{textAlign:"left"}}>
             <Col>
-              <Image src="/Img/blood.svg" height="15" width="30" />{gun.damage}
+              <Image src="/Img/blood.svg" height="20" width="20" /> {gun.damage}
             </Col>
             <Col>
-              <Image src="/Img/price.svg" height="15" width="30" />{gun.price}
+              <Image src="/Img/price.svg" height="20" width="20" /> {gun.price}
             </Col>
           </Row>
           <Row style={{textAlign:"left"}}>
             <Col>
-			<Image src="/Img/accuracy.svg" height="15" width="30" />{gun.accuracy}
+			<Image src="/Img/accuracy.svg" height="20" width="20" /> {gun.accuracy}
             </Col>
 			<Col />
           </Row>
           <Row style={{textAlign:"left"}}>
             <Col>
-			<Image src="/Img/bullet.svg" height="15" width="30" />{gun.firerate}
+			<Image src="/Img/bullet.svg" height="20" width="20" /> {gun.firerate}
             </Col>
 			<Col />
           </Row>
