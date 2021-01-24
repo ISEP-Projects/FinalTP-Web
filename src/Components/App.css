@@ -60,6 +60,11 @@
 	font-size: 1.2rem;
 }
 
-.card-link:hover {
+#selectMercForm,
+.card-link {
+	cursor: pointer;
+}
+
+.accordion > .card > .card-header {
 	cursor: pointer;
 }
