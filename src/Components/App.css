@@ -59,3 +59,7 @@
 	font-weight: 600;
 	font-size: 1.2rem;
 }
+
+.card-link:hover {
+	cursor: pointer;
+}
