@@ -4,10 +4,9 @@ import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
 
-import { getGuns, getMercs, buyGun, setShowToast } from "../actions";
+import { getGuns, getMercs, buyGun } from "../actions";
 import { GunCard } from "./GunCard";
 import { Loading } from "./Loading";
-import { SetToast } from "./SetToast";
 import { SelectMerc } from "./SelectMerc";
 
 const Weapons = ({
@@ -15,9 +14,6 @@ const Weapons = ({
   gunsList,
   isLoading,
   errMess,
-  content,
-  showToast,
-  handleShowToast,
 }) => {
   const dispatch = useDispatch();
 
@@ -78,7 +74,6 @@ const Weapons = ({
   } else
     return (
       <Container>
-        <SetToast text={content} show={showToast} setShow={handleShowToast} />
         <Row>
           <Col>
             <h1>Weapons</h1>
@@ -108,11 +103,7 @@ const mapStateToProps = (state) => ({
   errMess: state.mercs.errMess,
   gunsList: state.guns.gunsList,
   showForm: state.mercs.showForm,
-  content: state.toast.content,
-  showToast: state.toast.show,
-});
-const mapDispatchToProps = (dispatch) => ({
-  handleShowToast: (bool) => dispatch(setShowToast(bool)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Weapons);
+
+export default connect(mapStateToProps)(Weapons);

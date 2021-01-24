@@ -15,7 +15,6 @@ import {
 	showAddJobForm,
 	getJobDone,
 	getMercs,
-	setShowToast,
 	getGuns
 } from '../actions'
 
@@ -33,9 +32,6 @@ const Jobs = ({
 	handleGetGuns,
 	handleDelete,
 	handleGetJobDone,
-	content,
-	showToast,
-	handleShowToast,
 }) => {
 	const [mercID, setMercID] = useState(0)
 	const availableMercList = mercsList.filter((merc) => merc.isAlive)
@@ -74,9 +70,6 @@ const Jobs = ({
 					mercId={mercID}
 					handleDelete={handleDelete}
 					handleGetJobDone={handleGetJobDone}
-					content={content}
-					showToast={showToast}
-					handleShowToast={handleShowToast}
 				/>
 			</Accordion>
 		</div>
@@ -146,8 +139,6 @@ const mapStateToProps = (state) => ({
 	isLoading: state.jobs.isLoading,
 	errMess: state.jobs.errMess,
 	showForm: state.jobs.showForm,
-	content: state.toast.content,
-	showToast: state.toast.show,
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -157,7 +148,6 @@ const mapDispatchToProps = (dispatch) => ({
 	handleGetJobs: () => dispatch(getJobs()),
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
 	handleGetJobDone: (mercID, jobId) => dispatch(getJobDone(mercID, jobId)),
-	handleShowToast: (bool) => dispatch(setShowToast(bool)),
 	handleGetGuns: () => dispatch(getGuns())
 })
 

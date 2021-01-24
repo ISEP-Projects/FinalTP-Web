@@ -231,10 +231,14 @@ export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
 			}
 		})
 		.catch((err) => {
-			dispatch(getJobs())
-			dispatch(getMercs())
-			dispatch(setShowToast(true))
-			dispatch(setToast("No selected merc"))
+			if (err.response.status === 500){
+				dispatch(setShowToast(true))
+				dispatch(setToast("You can not get more eddies!"))
+			}else {
+				dispatch(setShowToast(true))
+				dispatch(setToast(err.response.data))
+			}
+			console.log(err.response)
 			alertMessage(err.message)
 		})
 }
