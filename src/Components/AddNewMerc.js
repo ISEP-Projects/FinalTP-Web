@@ -46,6 +46,8 @@ export const AddNewMerc = ({ show, handleClose }) => {
 							placeholder='Age'
 							onChange={handleChange}
 							type="number"
+							min={0}
+              				max={2147483647}
 							required
 						/>
 					</Form.Group>

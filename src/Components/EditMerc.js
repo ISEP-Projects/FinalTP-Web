@@ -48,6 +48,8 @@ export const EditMerc = ({ merc, show, handleClose }) => {
 							placeholder={merc.legalAge}
 							onChange={handleChange}
 							type="number"
+							min={0}
+              				max={2147483647}
 						/>
 					</Form.Group>
 					<Button type='submit' value='submit' color='primary' >

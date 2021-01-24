@@ -76,6 +76,7 @@ export const AddNewJob = ({ show, handleClose }) => {
               name="henchmenCount"
               type="number"
               min={0}
+              max={2147483647}
               onChange={handleChange}
               required
             />
@@ -84,6 +85,7 @@ export const AddNewJob = ({ show, handleClose }) => {
               name="reward"
               type="number"
               min={1}
+              max={2147483647}
               onChange={handleChange}
             />
           </Form.Group>

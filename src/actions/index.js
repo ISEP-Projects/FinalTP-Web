@@ -226,14 +226,15 @@ export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
 				dispatch(getMercs())
 				dispatch(getGuns())
 				dispatch(setShowToast(true))
-				dispatch(setToast('Job get done'))
+				dispatch(setToast(response.data.status))
+				console.log(response.data.status.status)
 			}
 		})
 		.catch((err) => {
 			dispatch(getJobs())
 			dispatch(getMercs())
 			dispatch(setShowToast(true))
-			dispatch(setToast(err.response.data))
+			dispatch(setToast(err.message))
 			alertMessage(err.message)
 		})
 }

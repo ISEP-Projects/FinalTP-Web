@@ -16,11 +16,13 @@ import {
 	getJobDone,
 	getMercs,
 	setShowToast,
+	getGuns
 } from '../actions'
 
 const Jobs = ({
 	mercsList,
 	jobsList,
+	gunsList,
 	isLoading,
 	errMess,
 	showForm,
@@ -28,6 +30,7 @@ const Jobs = ({
 	handleCloseAddNewJob,
 	handleGetMercs,
 	handleGetJobs,
+	handleGetGuns,
 	handleDelete,
 	handleGetJobDone,
 	content,
@@ -35,7 +38,7 @@ const Jobs = ({
 	handleShowToast,
 }) => {
 	const [mercID, setMercID] = useState(0)
-
+	const availableMercList = mercsList.filter((merc) => merc.isAlive)
 	useEffect(() => {
 		if (isLoading && jobsList.length === 0) {
 			handleGetJobs()
@@ -43,16 +46,19 @@ const Jobs = ({
 		if (isLoading && mercsList.length === 0) {
 			handleGetMercs()
 		}
-	}, [handleGetJobs, handleGetMercs, isLoading, jobsList, mercsList])
+		if (isLoading && gunsList.length === 0) {
+			handleGetGuns()
+		  }
+	}, [handleGetJobs, handleGetMercs, handleGetGuns, isLoading, jobsList, mercsList, gunsList])
 
 	const { mercId } = useParams()
 	if (mercID === 0) {
 		if (mercId !== undefined) {
 			console.log('Setting merc Id to ' + mercId)
 			setMercID(mercId)
-		} else if (mercId === undefined && mercsList.length !== 0) {
-			console.log('Setting merc Id to ' + mercsList[0].id)
-			setMercID(mercsList[0].id)
+		} else if (mercId === undefined && availableMercList.length !== 0) {
+			console.log('Setting merc Id to ' + availableMercList[0].id)
+			setMercID(availableMercList[0].id)
 		}
 	}
 
@@ -107,7 +113,7 @@ const Jobs = ({
 						<Col xs='auto'>
 							<SelectMerc
 								mercID={mercID}
-								mercsList={mercsList}
+								mercsList={availableMercList}
 								onChangeMerc={onChangeMerc}
 							/>
 						</Col>
@@ -136,6 +142,7 @@ Jobs.propTypes = {
 const mapStateToProps = (state) => ({
 	mercsList: state.mercs.mercs,
 	jobsList: state.jobs.jobs,
+	gunsList: state.guns.gunsList,
 	isLoading: state.jobs.isLoading,
 	errMess: state.jobs.errMess,
 	showForm: state.jobs.showForm,
@@ -151,6 +158,7 @@ const mapDispatchToProps = (dispatch) => ({
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
 	handleGetJobDone: (mercID, jobId) => dispatch(getJobDone(mercID, jobId)),
 	handleShowToast: (bool) => dispatch(setShowToast(bool)),
+	handleGetGuns: () => dispatch(getGuns())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs)
