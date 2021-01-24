@@ -37,6 +37,7 @@ export const AddNewMerc = ({ show, handleClose }) => {
 							name='nickname'
 							placeholder='Nick Name'
 							onChange={handleChange}
+							required
 						/>
 					</Form.Group>
 					<Form.Group>
@@ -44,6 +45,8 @@ export const AddNewMerc = ({ show, handleClose }) => {
 							name='legalAge'
 							placeholder='Age'
 							onChange={handleChange}
+							type="number"
+							required
 						/>
 					</Form.Group>
 					<Button type='submit' value='submit' color='primary'>

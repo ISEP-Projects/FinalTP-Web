@@ -47,6 +47,7 @@ export const EditMerc = ({ merc, show, handleClose }) => {
 							name='legalAge'
 							placeholder={merc.legalAge}
 							onChange={handleChange}
+							type="number"
 						/>
 					</Form.Group>
 					<Button type='submit' value='submit' color='primary' >
