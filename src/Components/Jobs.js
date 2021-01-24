@@ -15,7 +15,7 @@ import {
 	showAddJobForm,
 	getJobDone,
 	getMercs,
-	getGuns
+	getGuns,
 } from '../actions'
 
 const Jobs = ({
@@ -44,8 +44,16 @@ const Jobs = ({
 		}
 		if (isLoading && gunsList.length === 0) {
 			handleGetGuns()
-		  }
-	}, [handleGetJobs, handleGetMercs, handleGetGuns, isLoading, jobsList, mercsList, gunsList])
+		}
+	}, [
+		handleGetJobs,
+		handleGetMercs,
+		handleGetGuns,
+		isLoading,
+		jobsList,
+		mercsList,
+		gunsList,
+	])
 
 	const { mercId } = useParams()
 	if (mercID === 0) {
@@ -62,7 +70,7 @@ const Jobs = ({
 
 	const job = jobsList.map((job, index) => (
 		<div key={index}>
-			<Accordion defaultActiveKey='0'>
+			<Accordion defaultActiveKey="0">
 				<JobCard
 					job={job}
 					mercId={mercID}
@@ -100,8 +108,8 @@ const Jobs = ({
 							<h1>Jobs</h1>
 						</Col>
 					</Row>
-					<Row className='justify-content-center'>
-						<Col xs='auto'>
+					<Row className="justify-content-center">
+						<Col xs="auto">
 							<SelectMerc
 								mercID={mercID}
 								mercsList={availableMercList}
@@ -109,10 +117,10 @@ const Jobs = ({
 							/>
 						</Col>
 					</Row>
-					<Row className='justify-content-center'>{job}</Row>
-					<Row className='justify-content-center'>
+					<Row className="justify-content-center">{job}</Row>
+					<Row className="justify-content-center">
 						<Button
-							variant='dark'
+							variant="dark"
 							style={{ float: 'right', width: '50rem' }}
 							onClick={handleShowAddNewJob}
 						>
@@ -149,8 +157,9 @@ const mapDispatchToProps = (dispatch) => ({
 	handleGetMercs: () => dispatch(getMercs()),
 	handleGetJobs: () => dispatch(getJobs()),
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
-	handleGetJobDone: (mercID, jobId, reward) => dispatch(getJobDone(mercID, jobId, reward)),
-	handleGetGuns: () => dispatch(getGuns())
+	handleGetJobDone: (mercID, jobId, reward) =>
+		dispatch(getJobDone(mercID, jobId, reward)),
+	handleGetGuns: () => dispatch(getGuns()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Jobs)

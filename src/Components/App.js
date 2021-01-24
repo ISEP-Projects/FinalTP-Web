@@ -8,26 +8,26 @@ import Weapons from './Weapons'
 
 function App() {
 	return (
-		<div className='App'>
+		<div className="App">
 			<BrowserRouter>
 				<Navbar />
 				<Switch>
 					<Route exact path={['/', '/home']}>
 						<Home />
 					</Route>
-					<Route path='/mercs'>
+					<Route path="/mercs">
 						<Mercs />
 					</Route>
-					<Route path='/guns/:mercId'>
+					<Route path="/guns/:mercId">
 						<Weapons />
 					</Route>
-					<Route path='/guns'>
+					<Route path="/guns">
 						<Weapons />
 					</Route>
-					<Route path='/jobs/:mercId'>
+					<Route path="/jobs/:mercId">
 						<Jobs />
 					</Route>
-					<Route path='/jobs'>
+					<Route path="/jobs">
 						<Jobs />
 					</Route>
 				</Switch>

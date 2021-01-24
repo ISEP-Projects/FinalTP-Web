@@ -112,6 +112,4 @@ describe('Testing actions', () => {
 		}
 		expect(actions.showAddMercForm(bool)).toEqual(expectedAction)
 	})
-
-
 })

@@ -122,9 +122,7 @@ export const getJobs = () => async (dispatch) => {
 		})
 }
 
-export const createMerc = (nickname, legalAge) => async (
-	dispatch,
-) => {
+export const createMerc = (nickname, legalAge) => async (dispatch) => {
 	const response = await Axios.post(
 		`http://localhost:8081/merc/create/${nickname}/${legalAge}`
 	)
@@ -141,7 +139,10 @@ export const buyGun = (mercId, gunId) => async (dispatch) => {
 			dispatch(setToast('Gun bought'))
 		})
 		.catch((error) => {
-			if (error.response.status === 402 || error.response.status === 404) {
+			if (
+				error.response.status === 402 ||
+				error.response.status === 404
+			) {
 				dispatch(setShowToast(true))
 				dispatch(setToast(error.response.data))
 			} else {
@@ -156,7 +157,7 @@ export const deleteMerc = (id) => async (dispatch) => {
 			if (response.status === 200) {
 				dispatch(getMercs())
 				dispatch(setShowToast(true))
-				dispatch(setToast("Merc deleted!"))
+				dispatch(setToast('Merc deleted!'))
 			}
 		})
 		.catch((err) => {
@@ -195,19 +196,19 @@ export const getJobDone = (mercId, jobId, reward) => async (dispatch) => {
 		.then((response) => {
 			if (response.data.status === 'success') {
 				dispatch(setShowToast(true))
-				dispatch(setToast("Bravo, you got " + reward + " eddies!"))
-			} else if (response.data.status === 'fail'){
+				dispatch(setToast('Bravo, you got ' + reward + ' eddies!'))
+			} else if (response.data.status === 'fail') {
 				dispatch(setShowToast(true))
-				dispatch(setToast("Mission fail, you are dead!"))
+				dispatch(setToast('Mission fail, you are dead!'))
 			}
 			dispatch(getMercs())
 			dispatch(getJobs())
 		})
 		.catch((err) => {
-			if (err.response.status === 500){
+			if (err.response.status === 500) {
 				dispatch(setShowToast(true))
-				dispatch(setToast("You can not get more eddies!"))
-			}else {
+				dispatch(setToast('You can not get more eddies!'))
+			} else {
 				dispatch(setShowToast(true))
 				dispatch(setToast(err.response.data))
 			}
@@ -216,7 +217,9 @@ export const getJobDone = (mercId, jobId, reward) => async (dispatch) => {
 }
 
 export const editMerc = (mercId, name, age) => async (dispatch) => {
-	await Axios.put(`http://localhost:8081/merc/update/${mercId}/${name}/${age}`)
+	await Axios.put(
+		`http://localhost:8081/merc/update/${mercId}/${name}/${age}`
+	)
 		.then((response) => {
 			if (response.status === 200) {
 				dispatch(getMercs())

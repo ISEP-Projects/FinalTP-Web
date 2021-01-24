@@ -34,24 +34,24 @@ export const AddNewMerc = ({ show, handleClose }) => {
 				<Form onSubmit={handleSubmitNewMerc}>
 					<Form.Group>
 						<Form.Control
-							name='nickname'
-							placeholder='Nick Name'
+							name="nickname"
+							placeholder="Nick Name"
 							onChange={handleChange}
 							required
 						/>
 					</Form.Group>
 					<Form.Group>
 						<Form.Control
-							name='legalAge'
-							placeholder='Age'
+							name="legalAge"
+							placeholder="Age"
 							onChange={handleChange}
 							type="number"
 							min={0}
-              				max={2147483647}
+							max={2147483647}
 							required
 						/>
 					</Form.Group>
-					<Button type='submit' value='submit' color='primary'>
+					<Button type="submit" value="submit" color="primary">
 						Submit
 					</Button>
 				</Form>

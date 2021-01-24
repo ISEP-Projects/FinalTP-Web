@@ -36,7 +36,7 @@ export const EditMerc = ({ merc, show, handleClose }) => {
 					<Form.Group>
 						<Form.Label>Nick Name</Form.Label>
 						<Form.Control
-							name='nickname'
+							name="nickname"
 							placeholder={merc.nickname}
 							onChange={handleChange}
 						/>
@@ -44,19 +44,19 @@ export const EditMerc = ({ merc, show, handleClose }) => {
 					<Form.Group>
 						<Form.Label>Age</Form.Label>
 						<Form.Control
-							name='legalAge'
+							name="legalAge"
 							placeholder={merc.legalAge}
 							onChange={handleChange}
 							type="number"
 							min={0}
-              				max={2147483647}
+							max={2147483647}
 						/>
 					</Form.Group>
-					<Button type='submit' value='submit' color='primary' >
+					<Button type="submit" value="submit" color="primary">
 						Save
 					</Button>
 				</Form>
 			</Modal.Body>
 		</Modal>
 	)
-} 
+}

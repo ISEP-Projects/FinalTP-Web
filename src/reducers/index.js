@@ -8,7 +8,7 @@ const allReducers = combineReducers({
 	mercs: mercsReducer,
 	guns: gunsReducer,
 	jobs: jobsReducer,
-	toast: toastReducer
+	toast: toastReducer,
 })
 
 export default allReducers
