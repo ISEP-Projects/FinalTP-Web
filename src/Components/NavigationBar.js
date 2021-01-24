@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import { NavLink } from "react-router-dom";
 import { Nav, Navbar, Image } from "react-bootstrap";
 import { SetToast } from "./SetToast";
@@ -29,6 +30,11 @@ const NavigationBar = ({ content, showToast, handleShowToast }) => {
     </Navbar>
   );
 };
+
+NavigationBar.propTypes = {
+  content: PropTypes.string,
+	showToast: PropTypes.bool.isRequired,
+}
 
 const mapStateToProps = (state) => ({
   content: state.toast.content,

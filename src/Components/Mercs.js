@@ -86,6 +86,8 @@ Mercs.propTypes = {
   gunsList: PropTypes.array.isRequired,
   mercsList: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  errMess: PropTypes.string,
+	showForm: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({

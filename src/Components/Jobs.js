@@ -131,6 +131,10 @@ const Jobs = ({
 Jobs.propTypes = {
 	jobsList: PropTypes.array.isRequired,
 	isLoading: PropTypes.bool.isRequired,
+	mercsList: PropTypes.array.isRequired,
+	gunsList: PropTypes.array.isRequired,
+	errMess: PropTypes.string,
+	showForm: PropTypes.bool.isRequired,
 }
 const mapStateToProps = (state) => ({
 	mercsList: state.mercs.mercs,
