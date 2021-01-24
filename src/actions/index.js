@@ -156,7 +156,7 @@ export const deleteMerc = (id) => async (dispatch) => {
 			if (response.status === 200) {
 				dispatch(getMercs())
 				dispatch(setShowToast(true))
-				dispatch(setToast(response.data))
+				dispatch(setToast("Merc deleted!"))
 			}
 		})
 		.catch((err) => {
@@ -171,7 +171,7 @@ export const deleteJob = (id) => async (dispatch) => {
 	if (response.status === 200) {
 		dispatch(getJobs())
 		dispatch(setShowToast(true))
-		dispatch(setToast('Job deleted '))
+		dispatch(setToast('Job deleted! '))
 	}
 }
 

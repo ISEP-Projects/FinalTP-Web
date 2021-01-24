@@ -76,7 +76,7 @@ const Weapons = ({
             <h1>Weapons</h1>
           </Col>
         </Row>
-        <Row className="justify-content-md-center">
+        <Row className="justify-content-center">
           <Col xs="auto">
             <SelectMerc
               mercID={mercID}
@@ -85,7 +85,7 @@ const Weapons = ({
             />
           </Col>
         </Row>
-        <Row className="justify-content-md-center">{weapon}</Row>
+        <Row className="justify-content-center">{weapon}</Row>
       </Container>
     );
 };

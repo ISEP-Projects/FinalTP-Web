@@ -66,7 +66,7 @@ const Mercs = ({
               <h1>Mercs</h1>
             </Col>
           </Row>
-          <Row className="justify-content-md-center">
+          <Row className="justify-content-center">
             {merc}
             <Button
               variant="light"

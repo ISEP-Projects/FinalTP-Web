@@ -75,7 +75,7 @@ const Jobs = ({
 
 	if (isLoading) {
 		return (
-			<Container className='Container'>
+			<Container>
 				<Row>
 					<Loading />
 				</Row>
@@ -83,7 +83,7 @@ const Jobs = ({
 		)
 	} else if (errMess) {
 		return (
-			<Container className='Container'>
+			<Container>
 				<Row>
 					<Col>
 						<h4>{errMess}</h4>
@@ -94,13 +94,13 @@ const Jobs = ({
 	} else {
 		return (
 			<>
-				<Container className='Container'>
+				<Container>
 					<Row>
 						<Col>
 							<h1>Jobs</h1>
 						</Col>
 					</Row>
-					<Row className='justify-content-md-center'>
+					<Row className='justify-content-center'>
 						<Col xs='auto'>
 							<SelectMerc
 								mercID={mercID}
@@ -109,8 +109,8 @@ const Jobs = ({
 							/>
 						</Col>
 					</Row>
-					<Row className='justify-content-md-center'>{job}</Row>
-					<Row className='justify-content-md-center'>
+					<Row className='justify-content-center'>{job}</Row>
+					<Row className='justify-content-center'>
 						<Button
 							variant='dark'
 							style={{ float: 'right', width: '50rem' }}
