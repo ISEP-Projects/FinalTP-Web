@@ -135,9 +135,7 @@ export const createMerc = (nickname, legalAge) => async (
 
 export const buyGun = (mercId, gunId) => async (dispatch) => {
 	await Axios.put(`http://localhost:8081/merc/buygun/${mercId}/${gunId}`)
-		.then((result) => {
-			console.log('\nGun bought')
-			console.log(result)
+		.then(() => {
 			dispatch(getMercs())
 			dispatch(setShowToast(true))
 			dispatch(setToast('Gun bought'))
@@ -211,7 +209,6 @@ export const getJobDone = (mercId, jobId) => async (dispatch) => {
 				dispatch(setShowToast(true))
 				dispatch(setToast(err.response.data))
 			}
-			console.log(err.response)
 			alertMessage(err.message)
 		})
 }
