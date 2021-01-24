@@ -22,7 +22,7 @@ const Weapons = ({
   const dispatch = useDispatch();
 
   const [mercID, setMercID] = useState(0);
-
+  const availableMercList = mercsList.filter((merc) => merc.isAlive)
   useEffect(() => {
     if (isLoading && mercsList.length === 0) {
       dispatch(getMercs());
@@ -41,9 +41,9 @@ const Weapons = ({
   if (mercID === 0) {
     if (mercId !== undefined) {
       setMercID(mercId);
-    } else if (mercId === undefined && mercsList.length !== 0) {
+    } else if (mercId === undefined && availableMercList.length !== 0) {
       console.log("Setting merc Id to " + mercsList[0].id);
-      setMercID(mercsList[0].id);
+      setMercID(availableMercList[0].id);
     }
   }
 
@@ -88,7 +88,7 @@ const Weapons = ({
           <Col xs="auto">
             <SelectMerc
               mercID={mercID}
-              mercsList={mercsList}
+              mercsList={availableMercList}
               onChangeMerc={onChangeMerc}
             />
           </Col>
