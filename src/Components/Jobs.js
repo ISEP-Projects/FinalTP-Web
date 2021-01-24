@@ -50,10 +50,8 @@ const Jobs = ({
 	const { mercId } = useParams()
 	if (mercID === 0) {
 		if (mercId !== undefined) {
-			console.log('Setting merc Id to ' + mercId)
 			setMercID(mercId)
 		} else if (mercId === undefined && availableMercList.length !== 0) {
-			console.log('Setting merc Id to ' + availableMercList[0].id)
 			setMercID(availableMercList[0].id)
 		}
 	}

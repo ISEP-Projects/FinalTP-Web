@@ -29,7 +29,6 @@ const Weapons = ({
   }, [dispatch, isLoading, mercsList, gunsList]);
 
   const handleBuy = (gunId) => {
-    console.log("Buying " + gunId + " for " + mercID);
     dispatch(buyGun(mercID, gunId));
   };
 
@@ -38,13 +37,11 @@ const Weapons = ({
     if (mercId !== undefined) {
       setMercID(mercId);
     } else if (mercId === undefined && availableMercList.length !== 0) {
-      console.log("Setting merc Id to " + mercsList[0].id);
       setMercID(availableMercList[0].id);
     }
   }
 
   const onChangeMerc = (e) => {
-    console.log("Setting merc id =" + e.target.value);
     setMercID(e.target.value);
   };
 

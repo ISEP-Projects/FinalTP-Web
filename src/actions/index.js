@@ -89,43 +89,34 @@ export const setToast = (content) => ({
 	payload: content,
 })
 
-export const getGuns = () => async (dispatch, getState) => {
-	console.log('Calling API')
+export const getGuns = () => async (dispatch) => {
 	await Axios.get('http://localhost:8081/guns')
 		.then((response) => {
-			console.log('\nGun Data received: ')
 			dispatch(saveGuns(response.data))
 		})
 		.catch((error) => {
-			console.log('\nGun Data not received: ' + error.message)
 			dispatch(gunsFailed(error.message))
 			alertMessage(error.message)
 		})
 }
 
-export const getMercs = () => async (dispatch, getState) => {
-	console.log('Calling API')
+export const getMercs = () => async (dispatch) => {
 	await Axios.get('http://localhost:8081/merc/Allmercs')
 		.then((response) => {
-			console.log('\nMercs Data received: ')
 			dispatch(saveMercs(response.data))
 		})
 		.catch((error) => {
-			console.log('\nMerc Data not received: ' + error.message)
 			dispatch(mercsFailed(error.message))
 			alertMessage(error.message)
 		})
 }
 
 export const getJobs = () => async (dispatch, getState) => {
-	console.log('Calling API')
 	await Axios.get('http://localhost:8081/job/Alljobs')
 		.then((response) => {
-			console.log('\nJob Data received: ')
 			dispatch(saveJobs(response.data))
 		})
 		.catch((error) => {
-			console.log('\nJob Data not received: ' + error.message)
 			dispatch(jobsFailed(error.message))
 			alertMessage(error.message)
 		})
@@ -133,20 +124,16 @@ export const getJobs = () => async (dispatch, getState) => {
 
 export const createMerc = (nickname, legalAge) => async (
 	dispatch,
-	getState
 ) => {
-	console.log('Calling API')
 	const response = await Axios.post(
 		`http://localhost:8081/merc/create/${nickname}/${legalAge}`
 	)
 	if (response.status === 200) {
-		console.log('\nMerc created ' + response.data.result)
 		dispatch(getMercs())
 	}
 }
 
-export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
-	console.log('Calling API')
+export const buyGun = (mercId, gunId) => async (dispatch) => {
 	await Axios.put(`http://localhost:8081/merc/buygun/${mercId}/${gunId}`)
 		.then((result) => {
 			console.log('\nGun bought')
@@ -156,10 +143,7 @@ export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
 			dispatch(setToast('Gun bought'))
 		})
 		.catch((error) => {
-			console.log('Error')
-			console.log(error)
 			if (error.response.status === 402 || error.response.status === 404) {
-				console.log('\nGun not bought: ')
 				dispatch(setShowToast(true))
 				dispatch(setToast(error.response.data))
 			} else {
@@ -168,13 +152,10 @@ export const buyGun = (mercId, gunId) => async (dispatch, getState) => {
 		})
 }
 
-export const deleteMerc = (id) => async (dispatch, getState) => {
-	console.log('Calling API')
+export const deleteMerc = (id) => async (dispatch) => {
 	await Axios.delete(`http://localhost:8081/merc/${id}`)
 		.then((response) => {
 			if (response.status === 200) {
-				console.log('\nMerc deleted ')
-				//get Updated mercsList
 				dispatch(getMercs())
 				dispatch(setShowToast(true))
 				dispatch(setToast(response.data))
@@ -187,12 +168,9 @@ export const deleteMerc = (id) => async (dispatch, getState) => {
 		})
 }
 
-export const deleteJob = (id) => async (dispatch, getState) => {
-	console.log('Calling API')
+export const deleteJob = (id) => async (dispatch) => {
 	const response = await Axios.delete(`http://localhost:8081/job/${id}`)
 	if (response.status === 200) {
-		console.log('\nJob deleted ')
-		//get Updated mercsList
 		dispatch(getJobs())
 		dispatch(setShowToast(true))
 		dispatch(setToast('Job deleted '))
@@ -205,29 +183,24 @@ export const createJob = (
 	description,
 	henchmenCount,
 	reward
-) => async (dispatch, getState) => {
-	console.log('Calling API')
+) => async (dispatch) => {
 	const response = await Axios.post(
 		`http://localhost:8081/job/create/${fixer}/${title}/${description}/${henchmenCount}/${reward}`
 	)
 	if (response.status === 200) {
-		console.log('\nJob created ')
 		dispatch(getJobs())
 	}
 }
 
-export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
-	console.log('Calling API')
+export const getJobDone = (mercId, jobId) => async (dispatch) => {
 	await Axios.put(`http://localhost:8081/gettingJobDone/${mercId}/${jobId}`)
 		.then((response) => {
 			if (response.status === 200) {
-				console.log('\nJob get done ')
 				dispatch(getJobs())
 				dispatch(getMercs())
 				dispatch(getGuns())
 				dispatch(setShowToast(true))
 				dispatch(setToast(response.data.status))
-				console.log(response.data.status.status)
 			}
 		})
 		.catch((err) => {
@@ -244,11 +217,9 @@ export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
 }
 
 export const editMerc = (mercId, name, age) => async (dispatch) => {
-	console.log('Calling API')
 	await Axios.put(`http://localhost:8081/merc/update/${mercId}/${name}/${age}`)
 		.then((response) => {
 			if (response.status === 200) {
-				console.log('\nEdit success')
 				dispatch(getMercs())
 				dispatch(setShowToast(true))
 				dispatch(setToast('Edit success'))
