@@ -149,7 +149,7 @@ const mapDispatchToProps = (dispatch) => ({
 	handleGetMercs: () => dispatch(getMercs()),
 	handleGetJobs: () => dispatch(getJobs()),
 	handleDelete: (jobId) => dispatch(deleteJob(jobId)),
-	handleGetJobDone: (mercID, jobId) => dispatch(getJobDone(mercID, jobId)),
+	handleGetJobDone: (mercID, jobId, reward) => dispatch(getJobDone(mercID, jobId, reward)),
 	handleGetGuns: () => dispatch(getGuns())
 })
 

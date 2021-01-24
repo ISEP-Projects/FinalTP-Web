@@ -1,4 +1,4 @@
-import { Card, Button, Accordion, Col, Row } from 'react-bootstrap';
+import { Card, Button, Accordion, Col, Row, Image } from 'react-bootstrap';
 
 export const JobCard = ({
   job,
@@ -23,12 +23,12 @@ export const JobCard = ({
       <Accordion.Collapse eventKey={job.id}>
         <Card.Body>
           <Card.Text>{job.description}</Card.Text>
-          <Card.Text>henchmenCount: {job.henchmenCount}</Card.Text>
-          <Card.Text>reward: {job.reward}</Card.Text>
+          <Card.Text><Image src='/Img/henchmen.svg' height='20' width='30' /> {job.henchmenCount}</Card.Text>
+          <Card.Text><Image src='/Img/dollar.svg' height='20' width='30' /> {job.reward}</Card.Text>
           <Button
             variant="outline-info"
             disabled={!job.isAvailable}
-            onClick={() => handleGetJobDone(mercId, job.id)}
+            onClick={() => handleGetJobDone(mercId, job.id, job.reward)}
           >
             Initiate
           </Button>

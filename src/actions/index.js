@@ -111,7 +111,7 @@ export const getMercs = () => async (dispatch) => {
 		})
 }
 
-export const getJobs = () => async (dispatch, getState) => {
+export const getJobs = () => async (dispatch) => {
 	await Axios.get('http://localhost:8081/job/Alljobs')
 		.then((response) => {
 			dispatch(saveJobs(response.data))
@@ -190,16 +190,18 @@ export const createJob = (
 	}
 }
 
-export const getJobDone = (mercId, jobId) => async (dispatch) => {
+export const getJobDone = (mercId, jobId, reward) => async (dispatch) => {
 	await Axios.put(`http://localhost:8081/gettingJobDone/${mercId}/${jobId}`)
 		.then((response) => {
-			if (response.status === 200) {
-				dispatch(getJobs())
-				dispatch(getMercs())
-				dispatch(getGuns())
+			if (response.data.status === 'success') {
 				dispatch(setShowToast(true))
-				dispatch(setToast(response.data.status))
+				dispatch(setToast("Bravo, you got " + reward + " eddies!"))
+			} else if (response.data.status === 'fail'){
+				dispatch(setShowToast(true))
+				dispatch(setToast("Mission fail, you are dead!"))
 			}
+			dispatch(getMercs())
+			dispatch(getJobs())
 		})
 		.catch((err) => {
 			if (err.response.status === 500){
