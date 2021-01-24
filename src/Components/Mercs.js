@@ -6,13 +6,11 @@ import {
   getGuns,
   deleteMerc,
   showAddMercForm,
-  setShowToast,
 } from "../actions";
 import { Image, Container, Row, Col, Button } from "react-bootstrap";
 import { MercCard } from "./MercCard";
 import { AddNewMerc } from "./AddNewMerc";
 import { Loading } from "./Loading";
-import { SetToast } from "./SetToast";
 
 const Mercs = ({
   mercsList,
@@ -22,10 +20,7 @@ const Mercs = ({
   showForm,
   handleShowAddNewMerc,
   handleCloseAddNewMerc,
-  handleDelete,
-  content,
-  showToast,
-  handleShowToast,
+  handleDelete
 }) => {
   const dispatch = useDispatch();
 
@@ -66,7 +61,6 @@ const Mercs = ({
     return (
       <>
         <Container>
-          <SetToast text={content} show={showToast} setShow={handleShowToast} />
           <Row>
             <Col>
               <h1>Mercs</h1>
@@ -99,16 +93,13 @@ const mapStateToProps = (state) => ({
   isLoading: state.mercs.isLoading,
   errMess: state.mercs.errMess,
   gunsList: state.guns.gunsList,
-  showForm: state.mercs.showForm,
-  content: state.toast.content,
-  showToast: state.toast.show,
+  showForm: state.mercs.showForm
 });
 
 const mapDispatchToProps = (dispatch) => ({
   handleShowAddNewMerc: () => dispatch(showAddMercForm(true)),
   handleCloseAddNewMerc: () => dispatch(showAddMercForm(false)),
   handleDelete: (mercId) => dispatch(deleteMerc(mercId)),
-  handleShowToast: (bool) => dispatch(setShowToast(bool)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Mercs);

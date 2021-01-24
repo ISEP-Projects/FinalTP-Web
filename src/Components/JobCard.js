@@ -1,14 +1,10 @@
 import { Card, Button, Accordion, Col, Row } from 'react-bootstrap';
-import { SetToast } from './SetToast';
 
 export const JobCard = ({
   job,
   mercId,
   handleDelete,
   handleGetJobDone,
-  content,
-  showToast,
-  handleShowToast
 }) => {
   return (
     <Card
@@ -26,7 +22,6 @@ export const JobCard = ({
       </Accordion.Toggle>
       <Accordion.Collapse eventKey={job.id}>
         <Card.Body>
-          <SetToast text={content} show={showToast} setShow={handleShowToast} />
           <Card.Text>{job.description}</Card.Text>
           <Card.Text>henchmenCount: {job.henchmenCount}</Card.Text>
           <Card.Text>reward: {job.reward}</Card.Text>

@@ -234,7 +234,7 @@ export const getJobDone = (mercId, jobId) => async (dispatch, getState) => {
 			dispatch(getJobs())
 			dispatch(getMercs())
 			dispatch(setShowToast(true))
-			dispatch(setToast(err.message))
+			dispatch(setToast("No selected merc"))
 			alertMessage(err.message)
 		})
 }
